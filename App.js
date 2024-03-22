@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Camera } from "expo-camera";
 import GoToCamera from "./components/GoToCamera";
 import CameraPreview from "./components/CameraPreview";
@@ -43,6 +43,10 @@ export default function App() {
         __startCamera();
     };
 
+    const __handleBackButton = () => {
+        setStartCamera(false);
+    };
+
     return (
         <View style={styles.container}>
             {startCamera ? (
@@ -58,6 +62,31 @@ export default function App() {
                             camera = r;
                         }}
                     >
+                        <TouchableOpacity
+                            onPress={__handleBackButton}
+                            style={{
+                                position: "absolute",
+                                width: "20%",
+                                height: "6%",
+                                backgroundColor: "#14274e",
+                                top: 40,
+                                left: 10,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                opacity: 0.8
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    fontWeight: "bold",
+                                    textAlign: "center",
+                                }}
+                            >
+                                Back To Map
+                            </Text>
+                        </TouchableOpacity>
                         <View
                             style={{
                                 position: "absolute",
