@@ -1,7 +1,23 @@
 import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
+import * as FileSystem from "expo-file-system";
 
 export default function CameraPreview({ photo, retakePicture }) {
-    // console.log("sdsfds", photo);
+    // console.log(photo, 'photo');
+        const convertToBase64 = async (photo) => {
+          try {
+            base64 = await FileSystem.readAsStringAsync(photo.uri, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+            //   console.log(base64, 'baseeee');
+            return base64
+          } catch (error) {
+            console.error("Error converting to base64:", error);
+          }
+        };
+    convertToBase64(photo)
+        .then(convertedPhoto => {
+        console.log(convertedPhoto,'convertedPhoto');
+    })
     return (
         <View
             style={{
