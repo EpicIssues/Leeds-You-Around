@@ -1,24 +1,36 @@
 import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 import * as FileSystem from "expo-file-system";
+import recognizeLandmark from "./APIrequest";
+import { useEffect, useState } from "react";
 
 export default function CameraPreview({ photo, retakePicture }) {
-    // console.log(photo, 'photo');
+    const [landmarks, setLandmarks] = useState({})
+    
         const convertToBase64 = async (photo) => {
           try {
             base64 = await FileSystem.readAsStringAsync(photo.uri, {
               encoding: FileSystem.EncodingType.Base64,
             });
-            //   console.log(base64, 'baseeee');
             return base64
           } catch (error) {
             console.error("Error converting to base64:", error);
           }
         };
-    convertToBase64(photo)
-        .then(convertedPhoto => {
-        console.log(convertedPhoto,'convertedPhoto');
-    })
-    return (
+        convertToBase64(photo)
+            .then(convertedPhoto => {
+                recognizeLandmark(convertedPhoto)
+                    .then((data) => {
+                        if (Object.keys(landmarks).length === 0)
+                        setLandmarks(data)
+                    })
+})
+            
+            
+            
+            
+            
+console.log('whole page is rerendering');
+return (
         <View
             style={{
                 backgroundColor: "transparent",
@@ -44,8 +56,7 @@ export default function CameraPreview({ photo, retakePicture }) {
                         justifyContent: "center",
                         alignItems: "center",
                         height: 40,
-                        position: "absolute",
-
+                        position: "absolute"
                     }}
                 >
                     <Text
@@ -58,6 +69,20 @@ export default function CameraPreview({ photo, retakePicture }) {
                         Re-take
                     </Text>
                 </TouchableOpacity>
+                    <Text
+                style={{
+                    position: 'absolute',
+                    top: 40,
+                    left: 0,
+                    backgroundColor: 'white',
+                            color: "black",
+                            fontWeight: "bold",
+                            textAlign: "center",
+                        }}
+            >
+                {JSON.stringify(landmarks)}
+
+                    </Text>
         </View>
     );
 }

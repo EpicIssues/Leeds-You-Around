@@ -7,6 +7,7 @@ import CameraPreview from "./components/CameraPreview";
 export default function App() {
     // Set state for if camera is being used
     const [startCamera, setStartCamera] = useState(false);
+    
 
     // Function that Requests permissions to use camera if not already granted/denied
     const __startCamera = async () => {
@@ -51,13 +52,14 @@ export default function App() {
         <View style={styles.container}>
             {startCamera ? (
                 previewVisible && capturedImage ? (
-                    <CameraPreview
+                    <CameraPreview style={styles.CameraPreview}
                         photo={capturedImage}
                         retakePicture={__retakePicture}
+                        
                     />
                 ) : (
-                    <Camera
-                        style={{ flex: 1, width: "100%" }}
+                    <Camera ratio={'16:9'}
+                        style={{ objectFit: 'fill', width: "100%", height: '100%' }}
                         ref={(r) => {
                             camera = r;
                         }}
@@ -133,4 +135,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    CameraPreview: {
+        width: '100%',
+        height: '10%',
+    }
 });
