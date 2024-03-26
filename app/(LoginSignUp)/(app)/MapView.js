@@ -7,6 +7,10 @@ export default function MapPage() {
         router.replace('/CameraViews')
     }
 
+    const toARHandler = () => {
+        router.replace('/AR')
+    }
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.mapArea}>
@@ -15,6 +19,12 @@ export default function MapPage() {
             <TouchableOpacity onPress={toCameraHandler} style={styles.cameraLink}>
             <Text style={styles.cameraOpenBtn}>
                 Camera
+            </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={toARHandler} style={styles.arLink}>
+            <Text style={styles.arOpenBtn}>
+                Ar
             </Text>
             </TouchableOpacity>
         </View>
@@ -49,6 +59,15 @@ const styles = StyleSheet.create({
         bottom: 30,
         backgroundColor: "lightgreen",
         paddingVertical: 15,
+        paddingHorizontal: 40,
+    },
+    arLink: {
+        position: "absolute",
+        zIndex: 2,
+        top: 100,
+        right: 10,
+        backgroundColor: "orange",
+        paddingVertical: 10,
         paddingHorizontal: 40,
     }
 });

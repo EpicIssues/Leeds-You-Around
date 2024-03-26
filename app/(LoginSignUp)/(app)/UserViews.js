@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Link } from "react-native";
+import { View, StyleSheet, Text} from "react-native";
 
 export default function UserPage() {
     return (
