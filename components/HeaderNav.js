@@ -1,13 +1,32 @@
-import { View, StyleSheet, Text } from "react-native";
-import { Link } from "expo-router";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useState } from "react";
 
 export default function HeaderNav() {
+    const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+    const burgerMenuOpenHandler = () => {
+        setIsBurgerMenuOpen((currValue) => {
+            // console.log(`isBurgerMenuOpen is now ${!currValue}`)
+            return !currValue
+        })
+    }
+
+    // const userMenuHandler = () => {
+    //     setIsUserMenuOpen((currValue) => {
+    //         // console.log(`isUserMenuOpen is now ${!currValue}`)
+    //         return !currValue
+    //     })
+    // }
+
     return (
         <View style={styles.mainContainer}>
-            <Text style={styles.placeHolder}>Burger Menu</Text>
-            <Link href="/UserViews" style={styles.placeHolder}>
-                <Text >User icon</Text>
-            </Link>
+            <TouchableOpacity style={styles.placeHolder} onPress={burgerMenuOpenHandler}>
+                <Text>Burger Menu</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.placeHolder}> 
+                <Text>User icon</Text>
+            </TouchableOpacity>
         </View>
     );
 }
