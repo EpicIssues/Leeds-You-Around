@@ -14,6 +14,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "scheme": "app-scheme",
     "ios": {
       "supportsTablet": true
     },
@@ -31,6 +32,9 @@
       "eas": {
         "projectId": "8169e3fe-5155-4434-85e7-14a2ec85c1c7"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
