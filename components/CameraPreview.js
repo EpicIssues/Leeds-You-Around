@@ -4,7 +4,7 @@ import recognizeLandmark from "./APIrequest";
 import { useEffect, useState } from "react";
 
 export default function CameraPreview({ photo, retakePicture }) {
-    const [landmarks, setLandmarks] = useState({})
+    const [landmarks, setLandmarks] = useState([false,{}])
     
         const convertToBase64 = async (photo) => {
           try {
@@ -20,8 +20,8 @@ export default function CameraPreview({ photo, retakePicture }) {
             .then(convertedPhoto => {
                 recognizeLandmark(convertedPhoto)
                     .then((data) => {
-                        if (Object.keys(landmarks).length === 0)
-                        setLandmarks(data)
+                        if (!landmarks[0])
+                        setLandmarks([true, data])
                     })
 })
             
@@ -80,7 +80,7 @@ return (
                             textAlign: "center",
                         }}
             >
-                {JSON.stringify(landmarks)}
+                {JSON.stringify(landmarks[1])}
 
                     </Text>
         </View>
