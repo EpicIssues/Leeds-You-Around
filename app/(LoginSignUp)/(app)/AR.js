@@ -4,7 +4,7 @@ import { router } from "expo-router";
 export default function ARArea() {
 
     const backToMapHandler = () => {
-        router.replace('/MapView')
+        router.replace('/MapScreen')
     }
 
     return (
