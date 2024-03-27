@@ -3,8 +3,9 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Camera } from "expo-camera";
 import CameraPreview from "../../../components/CameraPreview";
 import { router } from "expo-router";
+import OpenCamera from "../../../components/OpenCamera";
 
-export default function App() {
+export default function CameraView() {
     // Set state for if camera is being used
     const [startCamera, setStartCamera] = useState(true);
 
@@ -27,15 +28,6 @@ export default function App() {
     // Assigns a new Camera instance
     let camera = new Camera();
 
-    // Function for taking a picture.
-    const __takePicture = async () => {
-        if (!camera) return;
-        const photo = await camera.takePictureAsync();
-        // console.log(photo);
-        setPreviewVisible(true);
-        setCapturedImage(photo);
-    };
-
     // Function for retaking an image (ie bringing you back to the camera)
     const __retakePicture = () => {
         setCapturedImage(null);
@@ -43,83 +35,21 @@ export default function App() {
         __startCamera();
     };
 
-    const __handleBackButton = () => {
-        setStartCamera(false);
-        router.replace("/MapScreen");
-    };
-
     return (
         <View style={styles.container}>
             {previewVisible && capturedImage ? (
-            <CameraPreview
-                style={styles.CameraPreview}
-                photo={capturedImage}
-                retakePicture={__retakePicture}
-            />
+                <CameraPreview
+                    style={styles.CameraPreview}
+                    photo={capturedImage}
+                    retakePicture={__retakePicture}
+                />
             ) : (
-            <Camera
-                ratio={"16:9"}
-                style={{ objectFit: "fill", width: "100%", height: "100%" }}
-                ref={(r) => {
-                    camera = r;
-                }}
-            >
-                <TouchableOpacity
-                    onPress={__handleBackButton}
-                    style={{
-                        position: "absolute",
-                        width: "20%",
-                        height: "6%",
-                        backgroundColor: "#14274e",
-                        top: 100,
-                        left: 10,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        opacity: 0.8,
-                    }}
-                >
-                    <Text
-                        style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}
-                    >
-                        Back To Map
-                    </Text>
-                </TouchableOpacity>
-                <View
-                    style={{
-                        position: "absolute",
-                        bottom: 0,
-                        flexDirection: "row",
-                        flex: 1,
-                        width: "100%",
-                        padding: 20,
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <View
-                        style={{
-                            alignSelf: "center",
-                            flex: 1,
-                            alignItems: "center",
-                        }}
-                    >
-                        <TouchableOpacity
-                            onPress={__takePicture}
-                            style={{
-                                width: 70,
-                                height: 70,
-                                bottom: 0,
-                                borderRadius: 50,
-                                backgroundColor: "#fff",
-                            }}
-                        />
-                    </View>
-                </View>
-            </Camera>
+                <OpenCamera
+                    setPreviewVisible={setPreviewVisible}
+                    setCapturedImage={setCapturedImage}
+                    setStartCamera={setStartCamera}
+                    camera={camera}
+                />
             )}
         </View>
     );
