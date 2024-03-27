@@ -1,5 +1,6 @@
 import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import { router } from "expo-router";
+import Map from "../../../components/Map";
 
 export default function MapPage() {
 
@@ -14,7 +15,7 @@ export default function MapPage() {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.mapArea}>
-                <Text style={styles.mapText}>Map</Text>
+                <Map style={styles.mapMap}/>
             </View>
             <TouchableOpacity onPress={toCameraHandler} style={styles.cameraLink}>
             <Text style={styles.cameraOpenBtn}>
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     mapArea: {
-        backgroundColor: "lightblue",
+        // backgroundColor: "lightblue",
         width: "100%",
         height: "100%",
         flex: 1,
@@ -69,5 +70,5 @@ const styles = StyleSheet.create({
         backgroundColor: "orange",
         paddingVertical: 10,
         paddingHorizontal: 40,
-    }
+    },
 });

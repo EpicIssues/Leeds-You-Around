@@ -45,7 +45,7 @@ export default function App() {
 
     const __handleBackButton = () => {
         setStartCamera(false);
-        router.replace("/MapView");
+        router.replace("/MapScreen");
     };
 
     return (
