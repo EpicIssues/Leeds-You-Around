@@ -4,33 +4,26 @@ import recognizeLandmark from "./APIrequest";
 import { useEffect, useState } from "react";
 
 export default function CameraPreview({ photo, retakePicture }) {
-    const [landmarks, setLandmarks] = useState([false,{}])
-    
-        const convertToBase64 = async (photo) => {
-          try {
+    const [landmarks, setLandmarks] = useState([false, {}]);
+
+    const convertToBase64 = async (photo) => {
+        try {
             base64 = await FileSystem.readAsStringAsync(photo.uri, {
-              encoding: FileSystem.EncodingType.Base64,
+                encoding: FileSystem.EncodingType.Base64,
             });
-            return base64
-          } catch (error) {
+            return base64;
+        } catch (error) {
             console.error("Error converting to base64:", error);
-          }
-        };
-        convertToBase64(photo)
-            .then(convertedPhoto => {
-                recognizeLandmark(convertedPhoto)
-                    .then((data) => {
-                        if (!landmarks[0])
-                        setLandmarks([true, data])
-                    })
-})
-            
-            
-            
-            
-            
-console.log('whole page is rerendering');
-return (
+        }
+    };
+    convertToBase64(photo).then((convertedPhoto) => {
+        recognizeLandmark(convertedPhoto).then((data) => {
+            if (!landmarks[0]) setLandmarks([true, data]);
+        });
+    });
+
+    console.log("whole page is rerendering");
+    return (
         <View
             style={{
                 backgroundColor: "transparent",
@@ -46,43 +39,42 @@ return (
                 }}
             />
             <TouchableOpacity
-                    onPress={retakePicture}
+                onPress={retakePicture}
+                style={{
+                    width: "50%",
+                    right: "25%",
+                    bottom: "2%",
+                    backgroundColor: "#14274e",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: 40,
+                    position: "absolute",
+                }}
+            >
+                <Text
                     style={{
-                        width: "50%",
-                        right: "25%",
-                        bottom: "2%",
-                        backgroundColor: "#14274e",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 40,
-                        position: "absolute"
+                        color: "#fff",
+                        fontWeight: "bold",
+                        textAlign: "center",
                     }}
                 >
-                    <Text
-                        style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}
-                    >
-                        Re-take
-                    </Text>
-                </TouchableOpacity>
-                    <Text
+                    Re-take
+                </Text>
+            </TouchableOpacity>
+            <Text
                 style={{
-                    position: 'absolute',
+                    position: "absolute",
                     top: 40,
                     left: 0,
-                    backgroundColor: 'white',
-                            color: "black",
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}
+                    backgroundColor: "white",
+                    color: "black",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                }}
             >
                 {JSON.stringify(landmarks[1])}
-
-                    </Text>
+            </Text>
         </View>
     );
 }
