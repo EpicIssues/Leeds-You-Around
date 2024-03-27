@@ -6,7 +6,7 @@ export default function QuestLevelPage() {
         <View style={styles.mainContainer}>
             <Text style={styles.header}>Quests/Levels</Text>
             <View style={styles.questStuff}>
-                <Link href="/MapView" style={styles.devSkipBtn}>
+                <Link href="/MapScreen" style={styles.devSkipBtn}>
                     <Text>To Map View</Text>
                 </Link>
             </View>
