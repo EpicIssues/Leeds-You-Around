@@ -24,7 +24,24 @@ import axios from 'axios'
     try {
       const response = await axios.post(apiUrl, requestData);
       const landmark = response.data.responses[0];
-        return landmark
+
+      // << List of Potential Landmarks >>
+      // if (landmark.landmarkAnnotations) {
+      //   console.log("")
+      //   console.log("(Potential Matches Start:)")
+      //   landmark.landmarkAnnotations.forEach((potentialLandmark) => {
+      //     console.log(potentialLandmark.description)
+      //   })
+      //   console.log("(Potential Matches End")
+      //   console.log("")
+      // }
+      // else {
+      //   console.log("")
+      //   console.log("no matched landmarks")
+      //   console.log("")
+      // }
+
+      return landmark
     } catch (error) {
       console.error("Error:", error);
     }
