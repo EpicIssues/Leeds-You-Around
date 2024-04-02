@@ -1,12 +1,15 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet } from "react-native";
-import UserContext from "./contexts/UserContext";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import CameraView from "./screens/CameraScreen";
 import CameraScreen from "./screens/CameraScreen";
+import LevelSelector from "./screens/LevelSelector";
+import UserContext from "./contexts/UserContext";
+import LevelContext from "./contexts/LevelContext";
+import { useState } from "react";
 // import { AppRegistry } from "react-native";
 // import App from "./App";
 
@@ -16,9 +19,11 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   // const [currentUser, setCurrenUser] = useState('yeahyeah')
-  const currentUser = "yeahyeah";
+  const [currentUser, setCurrentUser] = useState('')
+  const [currentLevel, setCurrentLevel] = useState(0)
   return (
-    <UserContext.Provider value={currentUser}>
+    <UserContext.Provider value={{currentUser, setCurrentUser}}>
+    <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -36,11 +41,11 @@ export default function App() {
             name="SignUp"
             component={SignUpScreen}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             options={{ headerShown: false }}
             name="LevelSelector"
             component={LevelSelector}
-          /> */}
+          />
           {/* <Stack.Screen
             options={{ headerShown: false }}
             name="MapView"
@@ -78,6 +83,7 @@ export default function App() {
           /> */}
         </Stack.Navigator>
       </NavigationContainer>
+    </LevelContext.Provider>
     </UserContext.Provider>
   );
 }
