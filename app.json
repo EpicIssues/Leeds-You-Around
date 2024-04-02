@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "CameraTestLatest",
-    "slug": "CameraTestLatest",
+    "name": "firebaseAuth",
+    "slug": "firebaseAuth",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "scheme": "app-scheme",
     "ios": {
       "supportsTablet": true
     },
@@ -23,18 +22,15 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.leedsyouaround.CameraTestLatest"
+      "package": "com.leedsyouaround.firebaseAuth"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "8169e3fe-5155-4434-85e7-14a2ec85c1c7"
+        "projectId": "4eddba35-d199-435f-a677-dd8b0a294c87"
       }
-    },
-    "plugins": [
-      "expo-router"
-    ]
+    }
   }
 }
