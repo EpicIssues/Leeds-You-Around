@@ -8,8 +8,8 @@ export default function OpenCamera({
     setStartCamera,
     camera,
 }) {
-
     const navigation = useNavigation()
+    
 
 
     // Function for taking a picture.
@@ -23,7 +23,7 @@ export default function OpenCamera({
 
     const __handleBackButton = () => {
         setStartCamera(false);
-        navigation.replace("MapScreen");
+        navigation.replace("Login");
     };
 
     return (

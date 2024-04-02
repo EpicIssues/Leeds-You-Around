@@ -1,7 +1,7 @@
 import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 import * as FileSystem from "expo-file-system";
-import recognizeLandmark from "./APIrequest";
 import { useEffect, useState } from "react";
+import recognizeLandmark from "./APIrequest";
 
 export default function CameraPreview({ photo, retakePicture }) {
     const [landmarks, setLandmarks] = useState([false, {}]);
