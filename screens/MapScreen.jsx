@@ -9,10 +9,19 @@ export default function MapScreen() {
         navigation.replace('CameraScreen')
     }
 
+    const backToHandler = () => {
+        navigation.replace("LevelSelector")
+    }
+
 
 
     return (
         <View style={styles.mainContainer}>
+            <TouchableOpacity style={styles.backButton} onPress={backToHandler}>
+                <Text>
+                    Back
+                </Text>
+            </TouchableOpacity>
             <View style={styles.mapArea}>
                 <Map style={styles.mapMap}/>
             </View>
@@ -56,4 +65,13 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 40,
     },
+    backButton: {
+        position: "absolute",
+        zIndex: 2,
+        left: 20,
+        top: 60,
+        backgroundColor: "lightgreen",
+        paddingVertical: 15,
+        paddingHorizontal: 40,
+    }
 });
