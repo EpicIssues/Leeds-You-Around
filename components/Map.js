@@ -6,7 +6,7 @@ import MapView, {
     Region,
 } from "react-native-maps";
 import { StyleSheet, TouchableOpacity, View, Text, Alert } from "react-native";
-import { one, two, three } from "./markers";
+import { one, two, three } from "./Markers";
 // import { useContext } from 'react';
 import LevelContext, { ThemeContext } from '../contexts/LevelContext';
 import { useNavigation } from "@react-navigation/core";
