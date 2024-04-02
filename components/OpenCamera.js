@@ -23,7 +23,7 @@ export default function OpenCamera({
 
     const __handleBackButton = () => {
         setStartCamera(false);
-        navigation.replace("Login");
+        navigation.replace("MapScreen");
     };
 
     return (
