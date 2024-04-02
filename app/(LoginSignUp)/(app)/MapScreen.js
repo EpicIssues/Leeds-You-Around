@@ -1,15 +1,17 @@
 import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
-import { router } from "expo-router";
 import Map from "../../../components/Map";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MapPage() {
 
+    const navigation = useNavigation()
+
     const toCameraHandler = () => {
-        router.replace('/CameraViews')
+        navigation.replace('CameraViews')
     }
 
     const toARHandler = () => {
-        router.replace('/AR')
+        navigation.replace('AR')
     }
 
     return (

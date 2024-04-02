@@ -2,10 +2,12 @@ import { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Camera } from "expo-camera";
 import CameraPreview from "../../../components/CameraPreview";
-import { router } from "expo-router";
 import OpenCamera from "../../../components/OpenCamera";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CameraView() {
+    const navigation = useNavigation();
+
     // Set state for if camera is being used
     const [startCamera, setStartCamera] = useState(true);
 

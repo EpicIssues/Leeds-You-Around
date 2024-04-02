@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, View } from "react-native";
 import { Camera } from "expo-camera";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OpenCamera({
     setPreviewVisible,
@@ -8,6 +8,10 @@ export default function OpenCamera({
     setStartCamera,
     camera,
 }) {
+
+    const navigation = useNavigation()
+
+
     // Function for taking a picture.
     const __takePicture = async () => {
         if (!camera) return;
@@ -19,7 +23,7 @@ export default function OpenCamera({
 
     const __handleBackButton = () => {
         setStartCamera(false);
-        router.replace("/MapScreen");
+        navigation.replace("MapScreen");
     };
 
     return (
