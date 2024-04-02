@@ -10,6 +10,7 @@ import LevelSelector from "./screens/LevelSelector";
 import UserContext from "./contexts/UserContext";
 import LevelContext from "./contexts/LevelContext";
 import { useState } from "react";
+import MapScreen from "./screens/MapScreen";
 // import { AppRegistry } from "react-native";
 // import App from "./App";
 
@@ -46,11 +47,11 @@ export default function App() {
             name="LevelSelector"
             component={LevelSelector}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             options={{ headerShown: false }}
-            name="MapView"
-            component={MapView}
-          /> */}
+            name="MapScreen"
+            component={MapScreen}
+          />
           <Stack.Screen
             options={{ headerShown: false }}
             name="CameraScreen"

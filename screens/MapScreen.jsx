@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import Map from "../components/Map";
 
-export default function MapPage() {
+export default function MapScreen() {
     const navigation = useNavigation()
 
     const toCameraHandler = () => {
