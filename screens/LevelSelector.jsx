@@ -105,7 +105,7 @@ export default function LevelSelector() {
             <TouchableOpacity style={styles.backBtn}>
               <Text>Back</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.goBtn}>
+            <TouchableOpacity onPress={() => navigation.replace("CameraScreen")} style={styles.goBtn}>
               <Text>Go</Text>
             </TouchableOpacity>
           </View>
