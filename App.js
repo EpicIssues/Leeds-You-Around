@@ -8,9 +8,9 @@ import CameraView from "./screens/CameraScreen";
 import CameraScreen from "./screens/CameraScreen";
 import LevelSelector from "./screens/LevelSelector";
 import UserContext from "./contexts/UserContext";
-import LevelContext from "./contexts/LevelContext";
 import { useState } from "react";
 import MapScreen from "./screens/MapScreen";
+import LevelContext from "./contexts/LevelContext";
 // import { AppRegistry } from "react-native";
 // import App from "./App";
 
