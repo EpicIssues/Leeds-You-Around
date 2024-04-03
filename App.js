@@ -13,6 +13,7 @@ import MapScreen from "./screens/MapScreen";
 import LevelContext from "./contexts/LevelContext";
 import db from "./db/firestore";
 import LandmarksContext from "./contexts/LandmarksContext";
+import RouteContext from "./contexts/RouteContext";
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ export default function App() {
       fetchData();
     }, []);
   return (
+    <RouteContext.Provider value={{route, setRoute}}>
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
     <LandmarksContext.Provider value={{landmarks, setLandmarks}}>
@@ -101,6 +103,7 @@ export default function App() {
     </LandmarksContext.Provider>
     </LevelContext.Provider>
     </UserContext.Provider>
+    </RouteContext.Provider>
   );
 }
 
