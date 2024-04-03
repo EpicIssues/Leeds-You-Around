@@ -14,6 +14,7 @@ import LevelContext from "./contexts/LevelContext";
 import db from "./db/firestore";
 import LandmarksContext from "./contexts/LandmarksContext";
 import RouteContext from "./contexts/RouteContext";
+import LastLocationContext from "./contexts/LastLocation";
 
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ export default function App() {
   const [currentLevel, setCurrentLevel] = useState([])
   const [landmarks, setLandmarks] = useState([])
   const [route, setRoute] = useState([])
+  const [lastLocation, setLastLocation] = useState({})
 
     useEffect(() => {
       const fetchData = async () => {
@@ -42,6 +44,7 @@ export default function App() {
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
     <LandmarksContext.Provider value={{landmarks, setLandmarks}}>
+    <LastLocationContext.Provider value={{lastLocation, setLastLocation}}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -101,6 +104,7 @@ export default function App() {
           /> */}
         </Stack.Navigator>
       </NavigationContainer>
+    </LastLocationContext.Provider>
     </LandmarksContext.Provider>
     </LevelContext.Provider>
     </UserContext.Provider>

@@ -9,7 +9,7 @@ export default function MapScreen() {
     const navigation = useNavigation()
     const { currentLevel, setCurrentLevel } = useContext(LevelContext);
 
-    // startRouteTracking()
+    startRouteTracking()
 
 
     const toCameraHandler = () => {
