@@ -22,6 +22,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState('')
   const [currentLevel, setCurrentLevel] = useState([])
   const [landmarks, setLandmarks] = useState([])
+  const [route, setRoute] = useState([])
 
     useEffect(() => {
       const fetchData = async () => {
