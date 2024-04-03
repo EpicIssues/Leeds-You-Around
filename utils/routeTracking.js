@@ -1,8 +1,7 @@
 import * as Location from 'expo-location'
 import { useContext, useEffect, useState } from 'react';
 import RouteContext from '../contexts/RouteContext';
-
-
+import LastLocationContext from '../contexts/LastLocation';
 
 
 let locationSubscription = null
@@ -15,6 +14,7 @@ export function stopRouteTracking() {
 export function startRouteTracking() {
 
     const {route, setRoute} = useContext(RouteContext)
+    const {lastLocation, setLastLocation} = useContext(LastLocationContext)
 
     const [liveLocation, setLiveLocation] = useState(null);
     const [permission, setPermission] = useState(undefined);
@@ -33,29 +33,33 @@ export function startRouteTracking() {
     }
 
     const getLiveLocation = async () => {
-            locationSubscription = await Location.watchPositionAsync (
-                {
-                accuracy: Location.Accuracy.BestForNavigation,
-                timeInterval: 1000,
-                distanceInterval: 10  
-                },
-                (livePos) => {
-                    console.log(livePos.coords.latitude, "-----latitude");
-                    console.log(livePos.coords.longitude, "-----longitude");
-                    console.log(livePos.timestamp, "-----timestamp");
-                    let lat = livePos.coords.latitude
-                    let lng = livePos.coords.longitude
-                    let timeStamp = livePos.timestamp
-                    
-                    polylineArray.push({latitude: lat, longitude: lng})
-                    console.log(polylineArray, "-----polyline array");
-                    setLiveLocation(polylineArray)
-                    // [...route, {latitude: lat, longitude: lng}]
-                    setRoute({latitude, lng})
-                    console.log(route, "-----route");
-                    // timeStampArray.push(timeStamp)
-                    // console.log(timeStampArray, "-----timestamp Array");
-                })
+        locationSubscription = await Location.watchPositionAsync (
+            {
+            accuracy: Location.Accuracy.BestForNavigation,
+            timeInterval: 1000,
+            distanceInterval: 10  
+            },
+            (livePos) => {
+                console.log(livePos.coords.latitude, "-----latitude");
+                console.log(livePos.coords.longitude, "-----longitude");
+                console.log(livePos.timestamp, "-----timestamp");
+                let lat = livePos.coords.latitude
+                let lng = livePos.coords.longitude
+                let timeStamp = livePos.timestamp
+                
+                polylineArray.push({latitude: lat, longitude: lng})
+                console.log(polylineArray, "-----polyline array");
+                setLiveLocation(polylineArray)
+                setLastLocation({latitude: lat, longitude: lng})
+                console.log(lastLocation, "-----lastLocation");
+                // setRoute({})
+                
+                // setRoute({latitude: lat, longitude: lng})
+                // setRoute([...polylineArray])
+                // console.log(route, "-----route");
+                // timeStampArray.push(timeStamp)
+                // console.log(timeStampArray, "-----timestamp Array");
+            })
         }
 
     useEffect(() => {
