@@ -38,7 +38,7 @@ const SignUpScreen = () => {
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.replace("Home");
+        navigation.replace("Login");
       }
     });
     return unsubscribe;
@@ -54,7 +54,7 @@ const SignUpScreen = () => {
         .createUserWithEmailAndPassword(email, password)
         .then((userCredentials) => {
           const user = userCredentials.user;
-          return db.collection("users").doc(username).set({
+          return db.collection("users").doc(user.email).set({
             username: username,
             level1comp: false,
             level2comp: false,
