@@ -4,11 +4,23 @@ import Map from "../components/Map";
 import { useNavigation } from "@react-navigation/core";
 import { useContext } from "react";
 import LevelContext from "../contexts/LevelContext";
+import LandmarksContext from "../contexts/LandmarksContext";
 
 export default function LevelSelector() {
   const navigation = useNavigation();
   const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+  const { landmarks } = useContext(LandmarksContext)
 
+  // let ctrl = true
+  // do {
+  //   landmarksSelector()
+  //   ctrl = false
+  // }
+  // while (ctrl === true)
+
+  function landmarksSelector(level=1) {
+    setCurrentLevel(landmarks.filter(landmark=> landmark.level === level))
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -17,19 +29,19 @@ export default function LevelSelector() {
         <View style={styles.levelSelector} height="30%" width="80%">
           <TouchableOpacity
             style={[styles.one, currentLevel === 0 && styles.selectedButton]}
-            onPress={() => setCurrentLevel(0)}
+            onPress={() => landmarksSelector(1)}
           >
             <Text>1X</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.two, currentLevel === 1 && styles.selectedButton]}
-            onPress={() => setCurrentLevel(1)}
+            onPress={() => landmarksSelector(2)}
           >
             <Text>2X</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.three, currentLevel === 2 && styles.selectedButton]}
-            onPress={() => setCurrentLevel(2)}
+            onPress={() => landmarksSelector(3)}
           >
             <Text>3X</Text>
           </TouchableOpacity>

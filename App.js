@@ -8,23 +8,37 @@ import CameraView from "./screens/CameraScreen";
 import CameraScreen from "./screens/CameraScreen";
 import LevelSelector from "./screens/LevelSelector";
 import UserContext from "./contexts/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MapScreen from "./screens/MapScreen";
 import LevelContext from "./contexts/LevelContext";
-// import { AppRegistry } from "react-native";
-// import App from "./App";
+import db from "./db/firestore";
+import LandmarksContext from "./contexts/LandmarksContext";
 
-// AppRegistry.registerComponent("firebaseAuth", () => App);
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  // const [currentUser, setCurrenUser] = useState('yeahyeah')
   const [currentUser, setCurrentUser] = useState('')
-  const [currentLevel, setCurrentLevel] = useState(0)
+  const [currentLevel, setCurrentLevel] = useState([])
+  const [landmarks, setLandmarks] = useState([])
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const obj = await db.collection("landmarks").get();
+          const landmarksData = obj.docs.map((doc) => doc.data());
+          setLandmarks(landmarksData);
+          console.log(landmarksData[0].location);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
+    }, []);
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
+    <LandmarksContext.Provider value={{landmarks, setLandmarks}}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -84,6 +98,7 @@ export default function App() {
           /> */}
         </Stack.Navigator>
       </NavigationContainer>
+    </LandmarksContext.Provider>
     </LevelContext.Provider>
     </UserContext.Provider>
   );
