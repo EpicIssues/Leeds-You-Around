@@ -3,10 +3,13 @@ import { useNavigation } from "@react-navigation/core";
 import Map from "../components/Map";
 import LevelContext from "../contexts/LevelContext";
 import { useContext } from "react";
+import { startRouteTracking } from "../utils/routeTracking";
 
 export default function MapScreen() {
     const navigation = useNavigation()
-      const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+    const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+
+    // startRouteTracking()
 
 
     const toCameraHandler = () => {
