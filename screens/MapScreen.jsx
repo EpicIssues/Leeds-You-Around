@@ -17,11 +17,11 @@ export default function MapScreen() {
         navigation.goBack("LevelSelector")
     }
 
-console.log(
-    currentLevel
-    ,
-  "==========``````````````````````````````````````````````````````````````````````````````````````````````````"
-);
+// console.log(
+//     currentLevel
+//     ,
+//   "==========``````````````````````````````````````````````````````````````````````````````````````````````````"
+// );
 
     return (
         <View style={styles.mainContainer}>

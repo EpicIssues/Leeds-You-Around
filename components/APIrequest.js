@@ -24,14 +24,17 @@ async function recognizeLandmark(image64) {
     try {
       const response = await axios.post(apiUrl, requestData);
       const landmark = response.data.responses[0];
+      
+
 
       // << List of Potential Landmarks >>
       // if (landmark.landmarkAnnotations) {
       //   console.log("")
       //   console.log("(Potential Matches Start:)")
-      //   landmark.landmarkAnnotations.forEach((potentialLandmark) => {
-      //     console.log(potentialLandmark.description)
-      //   })
+        if (landmark.landmarkAnnotations.length !==0)
+          return landmark.landmarkAnnotations.map((potentialLandmark) => potentialLandmark.description)
+        else
+          return []
       //   console.log("(Potential Matches End")
       //   console.log("")
       // }
@@ -40,9 +43,9 @@ async function recognizeLandmark(image64) {
       //   console.log("no matched landmarks")
       //   console.log("")
       // }
-
-      return landmark
+      
     } catch (error) {
+      console.log(error,'===============error');
       console.error("Error:", error);
     }
   }

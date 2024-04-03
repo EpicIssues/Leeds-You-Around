@@ -28,7 +28,7 @@ export default function App() {
           const obj = await db.collection("landmarks").get();
           const landmarksData = obj.docs.map((doc) => doc.data());
           setLandmarks(landmarksData);
-          console.log(landmarksData[0].location);
+          // console.log(landmarksData[0].location);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
