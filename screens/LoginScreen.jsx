@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -8,17 +8,26 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import db from "../db/firestore";
 import { auth } from "../firebase";
+import UserContext from "../contexts/UserContext";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const navigation = useNavigation();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        db.collection("users")
+          .doc(user.email)
+          .get()
+          .then((doc) => {
+            setCurrentUser({email: user.email, data: doc.data()})
+          });
         navigation.replace("LevelSelector");
       }
     });
@@ -26,8 +35,8 @@ const LoginScreen = () => {
   }, []);
 
   const goToSignUp = () => {
-    navigation.replace('SignUp')
-  }
+    navigation.replace("SignUp");
+  };
 
   const handleLogin = () => {
     auth
@@ -126,6 +135,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
 });
