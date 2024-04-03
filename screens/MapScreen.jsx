@@ -1,9 +1,13 @@
 import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import Map from "../components/Map";
+import LevelContext from "../contexts/LevelContext";
+import { useContext } from "react";
 
 export default function MapScreen() {
     const navigation = useNavigation()
+      const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+
 
     const toCameraHandler = () => {
         navigation.navigate('CameraScreen')
@@ -13,7 +17,11 @@ export default function MapScreen() {
         navigation.goBack("LevelSelector")
     }
 
-
+console.log(
+    currentLevel
+    ,
+  "==========``````````````````````````````````````````````````````````````````````````````````````````````````"
+);
 
     return (
         <View style={styles.mainContainer}>
