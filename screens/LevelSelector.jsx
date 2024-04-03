@@ -5,12 +5,17 @@ import { useNavigation } from "@react-navigation/core";
 import { useContext } from "react";
 import LevelContext from "../contexts/LevelContext";
 import LandmarksContext from "../contexts/LandmarksContext";
+import UserContext from "../contexts/UserContext";
+import { auth } from "../firebase";
+import db from "../db/firestore";
 
 export default function LevelSelector() {
   const navigation = useNavigation();
   const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+  const{currentUser, setCurrentUser} = useContext(UserContext)
   const { landmarks } = useContext(LandmarksContext)
 
+console.log(currentUser,'==================currentUserfrom level selector');
   // let ctrl = true
   // do {
   //   landmarksSelector()

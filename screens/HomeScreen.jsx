@@ -39,6 +39,16 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* {users.map((user) => (
+        <Text>
+          {user.username +
+            " L1: " +
+            user.level1comp +
+            " L2: " +
+            user.level2comp
+          + ' L3: ' +user.level3comp}
+        </Text>
+      ))} */}
       <Text>Email: {auth.currentUser?.email} </Text>
       <TouchableOpacity style={styles.button} onPress={handleSignOut}>
         <Text style={styles.buttonText}>Sign out</Text>
@@ -46,6 +56,8 @@ const HomeScreen = () => {
     </View>
   );
 };
+
+
 
 export default HomeScreen;
 
