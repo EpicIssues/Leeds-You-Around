@@ -45,7 +45,7 @@ const Map = () => {
     };
     const onMarkerSelected = (marker) => {
         // Alert.alert(marker.name);
-        setIsLoading(false)
+        // setIsLoading(false)
         // setLevel(two)
     };
     const callOutPressed = (ev) => {
@@ -64,7 +64,13 @@ const Map = () => {
                 showsUserLocation
                 showsMyLocationButton
                 onRegionChangeComplete={onRegionChange}
-                
+                initialRegion = {
+                    // City Centre - 53.79959044936186, -1.5471033798488403
+                    {latitude: 53.795525067393335,
+                    longitude: -1.5461106378887122,
+                    latitudeDelta: 0.02,
+                    longitudeDelta: 0.01,}
+                }
                 // ref={mapRef}
                 // minZoomLevel={9}
                 >

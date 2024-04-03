@@ -6,11 +6,11 @@ export default function MapScreen() {
     const navigation = useNavigation()
 
     const toCameraHandler = () => {
-        navigation.replace('CameraScreen')
+        navigation.navigate('CameraScreen')
     }
 
     const backToHandler = () => {
-        navigation.replace("LevelSelector")
+        navigation.goBack("LevelSelector")
     }
 
 
