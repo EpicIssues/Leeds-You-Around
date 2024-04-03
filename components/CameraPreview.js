@@ -1,10 +1,12 @@
 import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 import * as FileSystem from "expo-file-system";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import recognizeLandmark from "./APIrequest";
+import LevelContext from "../contexts/LevelContext";
 
 export default function CameraPreview({ photo, retakePicture }) {
-    const [landmarks, setLandmarks] = useState([false, {}]);
+    // const [landmarks, setLandmarks] = useState([false, {}]);
+  const { currentLevel, setCurrentLevel } = useContext(LevelContext);
 
     const convertToBase64 = async (photo) => {
         try {
@@ -18,7 +20,16 @@ export default function CameraPreview({ photo, retakePicture }) {
     };
     convertToBase64(photo).then((convertedPhoto) => {
         recognizeLandmark(convertedPhoto).then((data) => {
-            if (!landmarks[0]) setLandmarks([true, data]);
+            if(data.length !== 0){
+            console.log(data, '====================================data');
+            setCurrentLevel(currentLevel.filter(landmark => !data.includes(landmark.name)))
+        
+            console.log(currentLevel,'=================currentLevel');}
+            else
+            console.log('empty array of landmarks');
+
+
+            // if (!landmarks[0]) setLandmarks([true, data]);
         });
     });
 
@@ -73,7 +84,7 @@ export default function CameraPreview({ photo, retakePicture }) {
                     textAlign: "center",
                 }}
             >
-                {JSON.stringify(landmarks[1])}
+                {/* {JSON.stringify(landmarks[1])} */}
             </Text>
         </View>
     );

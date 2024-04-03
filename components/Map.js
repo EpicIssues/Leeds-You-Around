@@ -42,7 +42,7 @@ const Map = () => {
     // setLevel(two)
   };
   const callOutPressed = (ev) => {
-    console.log(ev);
+    // console.log(ev);
   };
   // if(isLoading){
   //     <View>

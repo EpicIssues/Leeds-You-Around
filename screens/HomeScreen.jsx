@@ -14,13 +14,13 @@ const HomeScreen = () => {
 
   /// getting users data into users state
   useEffect(() => {
-    console.log(currentUser);
+    // console.log(currentUser);
     const fetchData = async () => {
       try {
         const obj = await db.collection("users").get();
         const usersData = obj.docs.map((doc) => doc.data());
         setUsers(usersData);
-        console.log(usersData);
+        // console.log(usersData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
