@@ -116,13 +116,7 @@ export default function LevelSelector() {
         <View style={styles.mapView}>
           <Map
             style={styles.map}
-            initialRegion={{
-              latitude: 53.79543,
-              longitude: -1.54765,
-              latitudeDelta: 200,
-              longitudeDelta: 200,
-            }}
-          />
+              />
         </View>
         <View style={styles.itemListContainer}>
           <View style={styles.buttonsContainer}>
