@@ -9,59 +9,76 @@ import TimerContext from "../contexts/TimerContext";
 
 export default function CameraPreview({ photo, retakePicture }) {
     // const [landmarks, setLandmarks] = useState([false, {}]);
-  const { currentLevel, setCurrentLevel } = useContext(LevelContext);
-  const {hasStarted, setHasStarted} = useContext(HasStartedContext)
-  const {timer, setTimer} = useContext(TimerContext)
+    const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+    const { hasStarted, setHasStarted } = useContext(HasStartedContext);
+    const { timer, setTimer } = useContext(TimerContext);
 
-    const convertToBase64 = async (photo) => {
-        try {
-            base64 = await FileSystem.readAsStringAsync(photo.uri, {
-                encoding: FileSystem.EncodingType.Base64,
+    useEffect(() => {
+        const convertToBase64 = async (photo) => {
+            try {
+                base64 = await FileSystem.readAsStringAsync(photo.uri, {
+                    encoding: FileSystem.EncodingType.Base64,
+                });
+                return base64;
+            } catch (error) {
+                console.error("Error converting to base64:", error);
+            }
+        };
+        convertToBase64(photo).then((convertedPhoto) => {
+            recognizeLandmark(convertedPhoto)
+                .then((data) => {
+                    if (data.length !== 0) {
+                        console.log(
+                            data,
+                            "====================================data"
+                        );
+
+                        // target will go here ----------
+                        setCurrentLevel(
+                            currentLevel.filter(
+                                (landmark) => !data.includes(landmark.name)
+                            )
+                        );
+
+                        // console.log(
+                        //     currentLevel,
+                        //     "=================currentLevel"
+                        // );
+                    } else console.log("empty array of landmarks");
+
+                    // if (!landmarks[0]) setLandmarks([true, data]);
+                })
+                .then(() => {
+                    // if (!hasStarted && currentLevel.length === 4) {
+                        // setTimer({ startTime: Date.now(), endTime: null });
+                        // console.log("");
+                        // console.log("Has started");
+                        // console.log("");
+                        // startRouteTracking();
+                        // setHasStarted(true);
+                    // }
+
+                });
             });
-            return base64;
-        } catch (error) {
-            console.error("Error converting to base64:", error);
-        }
-    };
-    convertToBase64(photo).then((convertedPhoto) => {
-        recognizeLandmark(convertedPhoto).then((data) => {
-            if(data.length !== 0){
-            console.log(data, '====================================data');
-
-            // target will go here ----------
-            setCurrentLevel(currentLevel.filter(landmark => !data.includes(landmark.name)))
+        }, []);
         
-            console.log(currentLevel,'=================currentLevel');}
-            else
-            console.log('empty array of landmarks');
-
-            if (currentLevel.length < 5 && !hasStarted) {
-                setHasStarted(true)
-                setTimer({startTime: Date.now()})
-                startRouteTracking()
-                console.log("")
-                console.log("Has started")
-                console.log("")
-            }
-
-            if (currentLevel.length === 0) {
-                setTimer((currTime) => ({...currTime, endTime: Date.now()}))
-                stopRouteTracking()
-                // navigate to Rewards Page ----
-                console.log("")
-                console.log("You Have Finished")
-                console.log("")
-            }
-
-           
-
-
-
-
-            // if (!landmarks[0]) setLandmarks([true, data]);
-        });
-    });
-    console.log("whole page is rerendering")
+        if (currentLevel.length === 0 && hasStarted === true) {
+            setTimer((currTime) => ({
+                ...currTime,
+                endTime: Date.now(),
+            }));
+            stopRouteTracking();
+            setHasStarted(false);
+            // navigate to Rewards Page ----
+            console.log("");
+            console.log("You Have Finished");
+            console.log("");
+        }
+        
+        
+    console.log(timer, "<---timer");
+    console.log(currentLevel.length, "<------------ current level length");
+    console.log("whole page is rerendering");
     return (
         <View
             style={{

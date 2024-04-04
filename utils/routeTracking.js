@@ -17,7 +17,7 @@ export function stopRouteTracking() {
 
 export function startRouteTracking() {
 
-    const {route, setRoute} = useContext(RouteContext)
+    // const {route, setRoute} = useContext(RouteContext)
     const {lastLocation, setLastLocation} = useContext(LastLocationContext)
 
     const [liveLocation, setLiveLocation] = useState(null);
@@ -52,7 +52,7 @@ export function startRouteTracking() {
                 setLastLocation({latitude: lat, longitude: lng})
                 console.log(lastLocation, "-----lastLocation");
                 
-                setRoute([...route], {latitude: lat, longitude: lng})
+                // setRoute([...route], {latitude: lat, longitude: lng})
                 // polylineArray.push({latitude: lat, longitude: lng})
                 // console.log(polylineArray, "-----polyline array");
                 
