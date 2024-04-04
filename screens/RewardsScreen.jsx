@@ -1,8 +1,17 @@
-import React from 'react';
-import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity, LogBox } from 'react-native';
 import Map from "../components/Map";
+import UserContext from "../contexts/UserContext";
+
 function Rewards() {
-  return (
+    const {currentUser, setCurrentUser} = useContext(UserContext)
+    console.log(currentUser);
+    const level1Complete = currentUser.data.level1comp
+    const level2Complete = currentUser.data.level2comp
+    const level3Complete = currentUser.data.level3comp
+    // console.log(level1Complete);
+
+    return (
     <View style={styles.main}>
         <View style={styles.statsContainer}>
             <View><Text>Distance</Text></View>
@@ -10,13 +19,13 @@ function Rewards() {
         </View>
         <View style={styles.mapView}>
         <Map
-          style={styles.map}
-          initialRegion={{
+            style={styles.map}
+            initialRegion={{
             latitude: 53.79543,
             longitude: -1.54765,
             latitudeDelta: 200,
             longitudeDelta: 200,
-          }}
+            }}
         />
         </View>
         {/* <View style={styles.positionContainer}>
@@ -24,12 +33,12 @@ function Rewards() {
             <View><Text style={styles.board}>Board</Text></View>
         </View> */}
         <View style={styles.tropies}>
-        <Image style={styles.image} source={require('./images/trophy.png')}/>
-      <Image style={styles.image} source={require('./images/trophy.png')}/>
-      <Image style={styles.image} source={require('./images/trophy.png')}/>
+            <Image style={[level1Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
+            <Image style={[level2Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
+            <Image style={[level3Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
         </View>
         <View style={styles.allStats}> 
-          <Text style={styles.allStatsBtn}>All stats</Text>
+            <Text style={styles.allStatsBtn}>All stats</Text>
         </View>
     </View>
   )
@@ -66,9 +75,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 30
     },
-    image: {
+    imageShow: {
         height: 100,
-        width: 100
+        width: 100,
+    },
+    imageHide: {
+        height: 100,
+        width: 100,
+        opacity: 0.3,
     },
     allStats: {
         height: "10%",
