@@ -30,16 +30,16 @@ export default function MapScreen() {
     return (
       <View style={styles.mainContainer}>
         <TouchableOpacity style={styles.userButton} onPress={userToHandler}>
-          <Text>User</Text>
+          <Text style={styles.buttonOutlineText}>User</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.backButton} onPress={backToHandler}>
-          <Text>Back</Text>
+          <Text style={styles.buttonOutlineText}>Back</Text>
         </TouchableOpacity>
         <View style={styles.mapArea}>
           <Map style={styles.mapMap} />
         </View>
         <TouchableOpacity onPress={toCameraHandler} style={styles.cameraLink}>
-          <Text style={styles.cameraOpenBtn}>Camera</Text>
+          <Text style={styles.buttonOutlineText}>Camera</Text>
         </TouchableOpacity>
       </View>
     );
@@ -71,7 +71,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     bottom: 30,
-    backgroundColor: "lightgreen",
+    backgroundColor: "white",
+    borderColor: "#0782F9",
+    borderRadius: 10,
+    borderWidth: 2,
     paddingVertical: 15,
     paddingHorizontal: 40,
   },
@@ -80,7 +83,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
     left: 20,
     top: 60,
-    backgroundColor: "lightgreen",
+    backgroundColor: "white",
+    borderColor: "#0782F9",
+    borderRadius: 10,
+    borderWidth: 2,
     paddingVertical: 15,
     paddingHorizontal: 40,
   },
@@ -89,8 +95,15 @@ const styles = StyleSheet.create({
     zIndex: 2,
     right: 20,
     top: 60,
-    backgroundColor: "lightgreen",
+    backgroundColor: "white",
+    borderColor: "#0782F9",
+    borderRadius: 10,
+    borderWidth: 2,
     paddingVertical: 15,
     paddingHorizontal: 40,
+  },
+  buttonOutlineText: {
+    color: "#0782F9",
+    fontSize: 15
   },
 });
