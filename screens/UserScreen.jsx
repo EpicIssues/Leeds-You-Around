@@ -23,32 +23,36 @@ function UserScreen() {
   const polylineArray = currentUser.data.level1route;
   const navigation = useNavigation();
 
+  const level1Complete = currentUser.data.level1comp
+  const level2Complete = currentUser.data.level2comp
+  const level3Complete = currentUser.data.level3comp
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.main}>
         <View style={styles.hero}>
-          <Text style={styles.userText}>Hello {currentUser.data.username}</Text>
+          <Text style={styles.userText}>Hello {currentUser.data.username}!</Text>
           <View style={styles.trophys}>
             <Image
-              style={styles.image}
+              style={[level1Complete ? styles.imageShow : styles.imageHide]}
               source={require("./images/trophy.png")}
             />
             <Image
-              style={styles.image}
+              style={[level2Complete ? styles.imageShow : styles.imageHide]}
               source={require("./images/trophy.png")}
             />
             <Image
-              style={styles.image}
+              style={[level3Complete ? styles.imageShow : styles.imageHide]}
               source={require("./images/trophy.png")}
             />
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate("RankingScreen")}
           >
             <View style={styles.rankingBtn}>
               <Text style={{ color: "white" }}>Rankings</Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View
           style={[
@@ -76,7 +80,7 @@ function UserScreen() {
           </MapView>
         </View>
         <View style={styles.timeAndDistance}>
-          <Text style={styles.timeAndDistanceText}>Time: </Text>
+          <Text style={styles.timeAndDistanceText}>Route time: 18 mins 17 secs</Text>
         </View>
         <View style={styles.sightsContainer}>
           {landmarks
@@ -116,7 +120,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
   },
-  image: {
+  imageShow: {
+    height: 100,
+    width: 100,
+},
+  imageHide: {
     height: 100,
     width: 100,
     opacity: 0.3,
