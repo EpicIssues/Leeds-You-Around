@@ -7,7 +7,7 @@ import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
 import LevelNumberContext from "../contexts/LevelNumberContext";
 import UserContext from "../contexts/UserContext";
-import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
+import { postPolylineArray, startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import { useNavigation } from "@react-navigation/native";
 import db from "../db/firestore";
 import { doc, updateDoc } from "firebase/firestore";
@@ -69,6 +69,8 @@ export default function CameraPreview({ photo, retakePicture }) {
             console.log("You Have Finished");
             console.log("");
 
+        postPolylineArray(levelNumber)
+
         if (levelNumber === 2) {
             const updatedFields = {level2comp: true};
             db.collection("users").doc(currentUser.email).update(updatedFields)
@@ -81,7 +83,7 @@ export default function CameraPreview({ photo, retakePicture }) {
 
         }
 
-            navigation.navigate("RewardsScreen")
+            navigation.navigate("Confetti")
         }
 
         const __handleBackButton = () => {

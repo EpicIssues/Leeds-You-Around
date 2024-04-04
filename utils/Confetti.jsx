@@ -17,7 +17,7 @@ export default function ConfettiAnimation() {
 
     setTimeout(() => {
         navigation.navigate("RewardsScreen")
-    }, 100)
+    }, 8500)
 
     return (
         <View>

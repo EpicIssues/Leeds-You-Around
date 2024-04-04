@@ -1,6 +1,8 @@
 import * as Location from 'expo-location'
 import { useContext, useEffect, useState } from 'react';
 import RouteContext from '../contexts/RouteContext';
+import UserContext from "../contexts/UserContext";
+import LevelContext from '../contexts/LevelContext';
 import LastLocationContext from '../contexts/LastLocation';
 import db from "../db/firestore";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
@@ -9,7 +11,49 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 // const multipleUnionRes = await liveLocationRef.update({level1route: arrayUnion(...routeOnePolyline)})
 
 let locationSubscription = null
-const polylineArray = []
+let polylineArray = []
+
+export function postPolylineArray (level) {
+    const { currentUser, setCurrentUser } = useContext(UserContext);
+    
+    if (level === 1) {
+        const updatedFields = {level1route: arrayUnion(...polylineArray)};
+        db.collection("users").doc(currentUser.email).update(updatedFields)
+            .then(() => {
+                console.log('Document updated successfully.');
+            })
+            .catch((error) => {
+                console.error('Error updating document: ', error);
+            });
+    }
+    if (level === 2) {
+        const updatedFields = {level2route: arrayUnion(...polylineArray)};
+        db.collection("users").doc(currentUser.email).update(updatedFields)
+            .then(() => {
+                console.log('Document updated successfully.');
+            })
+            .catch((error) => {
+                console.error('Error updating document: ', error);
+            });
+    }
+    if (level === 3) {
+        const updatedFields = {level3route: arrayUnion(...polylineArray)};
+        db.collection("users").doc(currentUser.email).update(updatedFields)
+            .then(() => {
+                console.log('Document updated successfully.');
+            })
+            .catch((error) => {
+                console.error('Error updating document: ', error);
+            });
+    }
+    // const liveLocationRef = db.collection('users').doc(currentUser.email)
+    // const multipleUnionRes = await liveLocationRef.update({level1route: arrayUnion(...polylineArray)})
+}
+
+export function clearPolylineArray() {
+    polylineArray = []
+    console.log('clearing polylineArray');
+}
 
 export function stopRouteTracking() {
     locationSubscription?.remove()
@@ -78,9 +122,9 @@ export function startRouteTracking() {
             text = errorMsg;
         } else if (liveLocation) {
             // console.log(liveLocation, "-----liveLocation");
-            console.log(liveLocation.coords.latitude, "-----latitude");
-            console.log(liveLocation.coords.longitude, "-----longitude");
-            console.log(liveLocation.timestamp, "-----timestamp");
+            // console.log(liveLocation.coords.latitude, "-----latitude");
+            // console.log(liveLocation.coords.longitude, "-----longitude");
+            // console.log(liveLocation.timestamp, "-----timestamp");
             let lat = liveLocation.coords.latitude
             let lng = liveLocation.coords.longitude
             let timeStamp = liveLocation.timestamp

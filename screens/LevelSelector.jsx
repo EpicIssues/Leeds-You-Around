@@ -8,7 +8,7 @@ import LandmarksContext from "../contexts/LandmarksContext";
 import UserContext from "../contexts/UserContext";
 import { auth } from "../firebase";
 import db from "../db/firestore";
-import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
+import { clearPolylineArray, startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
 import LevelNumberContext from "../contexts/LevelNumberContext";
@@ -25,6 +25,7 @@ export default function LevelSelector() {
   useEffect(() => {
     setCurrentLevel(landmarks.filter((landmark) => landmark.level === 1));
     stopRouteTracking();
+    clearPolylineArray()
   }, []);
 
   
@@ -32,7 +33,7 @@ export default function LevelSelector() {
   // setCurrentLevel(landmarks.filter(landmark => landmark.level === 1))
   function landmarksSelector(level = 1) {
     setLevelNumber(level)
-    console.log(levelNumber);
+    // console.log(levelNumber);
     setCurrentLevel(landmarks.filter((landmark) => landmark.level === level));
   }
   // console.log(currentLevel[0].level, '=======================lan');
