@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   map: {
     backgroundColor: "#eee",
-    height: "50%",
+    height: "100%",
     width: "50%",
   },
   mapView: {
@@ -209,24 +209,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     marginBottom: 20,
-    height: "30%",
+    height: "40%",
     borderRadius: 5,
     overflow: "hidden",
     borderColor: "#0782F9",
+    marginBottom: 200,
   },
   goBtn: {
-    height: "100%",
+    height: "50%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
-
+    
     backgroundColor: "white",
     borderColor: "#0782F9",
     borderWidth: 2,
-    marginTop: 10,
-
-    margin: 10,
+    marginBottom: 210,
+    margin: 100,
   },
   buttonOutlineText: {
     color: "#0782F9",
