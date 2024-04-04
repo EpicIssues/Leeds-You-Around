@@ -59,6 +59,22 @@ export default function OpenCamera({
                     Back To Map
                 </Text>
             </TouchableOpacity>
+            <View style={{
+                position: "absolute",
+                    width: "40%",
+                    height: "30%",
+                    
+                    top: "35%",
+                    left: "30%",
+                    borderColor: "white",
+                    borderWidth: "2%",
+                    opacity: 0.6,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+            }}>
+
+            </View>
             <View
                 style={{
                     position: "absolute",
