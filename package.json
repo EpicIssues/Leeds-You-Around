@@ -20,6 +20,7 @@
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.9.0",
     "firebase-tools": "^13.6.0",
+    "lottie-react-native": "^6.7.0",
     "metro": "^0.80.7",
     "polyline": "^0.2.0",
     "react": "18.2.0",

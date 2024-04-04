@@ -20,6 +20,7 @@ import Rewards from "./screens/RewardsScreen";
 import UserScreen from "./screens/UserScreen";
 import Rankings from "./screens/RankingScreen";
 import ConfettiAnimation from "./utils/Confetti";
+import ConfettiAnimation from "./utils/Confetti";
 
 
 const Stack = createNativeStackNavigator();
@@ -104,7 +105,7 @@ export default function App() {
                   <Stack.Screen
                     options={{ headerShown: false }}
                     name="Confetti"
-                    component={confettiAnimation}
+                    component={ConfettiAnimation}
                   />
                   {/* <Stack.Screen
             options={{ headerShown: false }}

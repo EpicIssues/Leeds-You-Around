@@ -38,9 +38,9 @@ export default function LevelSelector() {
   }
   // console.log(currentLevel[0].level, '=======================lan');
 
-  const rewardsHandler = () => {
-    navigation.navigate("Confetti");
-  };
+    const rewardsHandler = () => {
+      navigation.navigate("Confetti");
+    };
 
   const handleGo = () => {
     // startRouteTracking()

@@ -55,7 +55,7 @@ export default function CameraPreview({ photo, retakePicture }) {
         
         if (currentLevel.length === 0 && hasStarted === true) {
             setTimer((currTime) => ({
-                ...currTime,
+                startTime: currTime.startTime,
                 endTime: Date.now(),
             }));
             stopRouteTracking();
@@ -67,6 +67,10 @@ export default function CameraPreview({ photo, retakePicture }) {
 
             navigation.navigate("RewardsScreen")
         }
+
+        const __handleBackButton = () => {
+            navigation.goBack("MapScreen");
+        };
         
         
     console.log(timer, "<---timer");
@@ -81,6 +85,32 @@ export default function CameraPreview({ photo, retakePicture }) {
                 height: "100%",
             }}
         >
+             <TouchableOpacity
+                onPress={__handleBackButton}
+                style={{
+                    position: "absolute",
+                    width: "20%",
+                    height: "6%",
+                    backgroundColor: "#14274e",
+                    top: 100,
+                    left: 10,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    opacity: 0.8,
+                    zIndex: 2
+                }}
+            >
+                <Text
+                    style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                    }}
+                >
+                    Back To Map
+                </Text>
+            </TouchableOpacity>
             <ImageBackground
                 source={{ uri: photo && photo.uri }}
                 style={{
