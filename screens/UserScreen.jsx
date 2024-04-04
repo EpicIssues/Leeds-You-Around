@@ -1,24 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Map from "../components/Map";
-import MapView, { PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Polyline } from "react-native-maps";
 import UserContext from "../contexts/UserContext";
-import LevelContext from '../contexts/LevelContext';
-
-
+import LevelContext from "../contexts/LevelContext";
+import LandmarksContext from "../contexts/LandmarksContext";
+import db from "../db/firestore";
 function UserScreen() {
-  const {currentUser} = useContext(UserContext)
-  const { currentLevel } = useContext(LevelContext)
-  
-  const polylineArray = currentUser.data.level1route
-
+  const { currentUser } = useContext(UserContext);
+  const { currentLevel } = useContext(LevelContext);
+  const { landmarks } = useContext(LandmarksContext);
+  const [level, setLevel] = useState();
+  // console.log(currentUser.data.level1comp === true)
+  const polylineArray = currentUser.data.level1route;
   const navigation = useNavigation();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.main}>
         <View style={styles.hero}>
-          <Text style={styles.userText}>Hello</Text>
+          <Text style={styles.userText}>Hello {currentUser.data.username}</Text>
           <View style={styles.trophys}>
             <Image
               style={styles.image}
@@ -36,9 +45,7 @@ function UserScreen() {
           <TouchableOpacity
             onPress={() => navigation.navigate("RankingScreen")}
           >
-            <View
-              style={styles.rankingBtn}
-            >
+            <View style={styles.rankingBtn}>
               <Text style={{ color: "white" }}>Rankings</Text>
             </View>
           </TouchableOpacity>
@@ -65,26 +72,32 @@ function UserScreen() {
               fillColor="rgba(255,0,47,1)"
               strokeWidth={6}
               lineDashPattern={[1]}
-              // zIndex={1}
             />
           </MapView>
         </View>
         <View style={styles.timeAndDistance}>
-          <Text style={styles.timeAndDistanceText}>Distance:</Text>
           <Text style={styles.timeAndDistanceText}>Time: </Text>
         </View>
-        <View style={[styles.sightsContainer]}>
-          <Text style={styles.sight}>sight 1</Text>
-          <Text style={styles.sight}>two</Text>
-          <Text style={styles.sight}>three</Text>
-          <Text style={styles.sight}>four</Text>
-          <Text style={styles.sight}>five</Text>
+        <View style={styles.sightsContainer}>
+          {landmarks
+            .filter((landmark) => landmark.level === 1)
+            .map((landmark, index) => {
+              return (
+                <Text key={landmark.name} style={styles.sight}>
+                  <Text>{landmark.description}</Text>
+                </Text>
+              );
+            })}
         </View>
       </View>
     </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 50,
+  },
   main: {
     height: "100%",
   },
@@ -123,15 +136,18 @@ const styles = StyleSheet.create({
   sightsContainer: {
     gap: 20,
     alignItems: "center",
+    flexDirection: "column",
   },
   sight: {
     height: 100,
-    width: "100%",
-    backgroundColor: "#E7E7E7",
+    height: "auto",
     width: "90%",
     borderRadius: 20,
-    overflow: "hidden",
     textAlign: "center",
+    backgroundColor: "#e7e7e7",
+    padding: 20,
+    borderRadius: 20,
+    overflow: "hidden",
   },
   rankingBtn: {
     height: 50,
@@ -142,8 +158,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#89CFF0",
-    fontSize: 20,
+    fontSize: 10,
   },
 });
 
-export default UserScreen
+export default UserScreen;
