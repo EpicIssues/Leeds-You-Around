@@ -37,7 +37,7 @@ export default function LevelSelector() {
   }
 
     const rewardsHandler = () => {
-      navigation.navigate("RewardsScreen");
+      navigation.navigate("Confetti");
     };
 
 
