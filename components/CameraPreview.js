@@ -157,7 +157,7 @@ export default function CameraPreview({ photo, retakePicture }) {
 
             <View
                 style={{
-                    width: "50%",
+                    width: "60%",
                     right: "0%",
                     top: "25%",
                     flexDirection: "row",
@@ -168,7 +168,8 @@ export default function CameraPreview({ photo, retakePicture }) {
                     flex: 1,
                     flexDirection: "column",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "flex-end",
+                    marginRight: 10
                 }}
             >
                 <Text style={{
@@ -186,14 +187,15 @@ export default function CameraPreview({ photo, retakePicture }) {
                     return <Text key={index} style={{
                         backgroundColor: "orange",
                         color: "black",
-                        padding: 15,
+                        paddingVertical: 15,
+                        paddingHorizontal: 5,
                         marginVertical: 10,
                         lineHeight: 8,
-                        fontWeight: "bold"
+                        fontWeight: "bold",
                         }}>
                         {landmark.name}
                     </Text>
-                    
+
                 })}
             </View>
         </View>
