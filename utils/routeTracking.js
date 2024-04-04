@@ -9,6 +9,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 // const multipleUnionRes = await liveLocationRef.update({level1route: arrayUnion(...routeOnePolyline)})
 
 let locationSubscription = null
+const polylineArray = []
 
 export function stopRouteTracking() {
     locationSubscription?.remove()
@@ -18,13 +19,12 @@ export function stopRouteTracking() {
 export function startRouteTracking() {
 
     // const {route, setRoute} = useContext(RouteContext)
-    const {lastLocation, setLastLocation} = useContext(LastLocationContext)
+    // const {lastLocation, setLastLocation} = useContext(LastLocationContext)
 
     const [liveLocation, setLiveLocation] = useState(null);
     const [permission, setPermission] = useState(undefined);
     const [errorMsg, setErrorMsg] = useState(null);
 
-    const polylineArray = []
     // const timeStampArray = []
 
     const getPermission = async () => {
@@ -49,8 +49,8 @@ export function startRouteTracking() {
                 // let timeStamp = livePos.timestamp
                 
                 setLiveLocation(livePos)
-                setLastLocation({latitude: lat, longitude: lng})
-                console.log(lastLocation, "-----lastLocation");
+                // setLastLocation({latitude: lat, longitude: lng})
+                // console.log(lastLocation, "-----lastLocation");
                 
                 // setRoute([...route], {latitude: lat, longitude: lng})
                 // polylineArray.push({latitude: lat, longitude: lng})

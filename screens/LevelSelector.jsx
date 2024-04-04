@@ -11,6 +11,7 @@ import db from "../db/firestore";
 import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
+import LevelNumberContext from "../contexts/LevelNumberContext";
 
 export default function LevelSelector() {
   const navigation = useNavigation();
@@ -19,21 +20,19 @@ export default function LevelSelector() {
   const { landmarks, setLandmarks } = useContext(LandmarksContext);
   const { setHasStarted } = useContext(HasStartedContext);
   const { timer, setTimer } = useContext(TimerContext);
+  const {levelNumber, setLevelNumber} = useContext(LevelNumberContext)
 
   useEffect(() => {
     setCurrentLevel(landmarks.filter((landmark) => landmark.level === 1));
     stopRouteTracking();
   }, []);
 
-  // let ctrl = true
-  // do {
-  //   landmarksSelector()
-  //   ctrl = false
-  // }
-  // while (ctrl === true)
+  
 
   // setCurrentLevel(landmarks.filter(landmark => landmark.level === 1))
   function landmarksSelector(level = 1) {
+    setLevelNumber(level)
+    console.log(levelNumber);
     setCurrentLevel(landmarks.filter((landmark) => landmark.level === level));
   }
   // console.log(currentLevel[0].level, '=======================lan');

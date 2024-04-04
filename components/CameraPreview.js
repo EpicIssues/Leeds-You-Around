@@ -3,17 +3,44 @@ import * as FileSystem from "expo-file-system";
 import { useContext, useEffect, useState } from "react";
 import recognizeLandmark from "./APIrequest";
 import LevelContext from "../contexts/LevelContext";
-import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
+import LevelNumberContext from "../contexts/LevelNumberContext";
+import UserContext from "../contexts/UserContext";
+import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import { useNavigation } from "@react-navigation/native";
+import db from "../db/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 export default function CameraPreview({ photo, retakePicture }) {
     // const [landmarks, setLandmarks] = useState([false, {}]);
     const { currentLevel, setCurrentLevel } = useContext(LevelContext);
     const { hasStarted, setHasStarted } = useContext(HasStartedContext);
     const { timer, setTimer } = useContext(TimerContext);
+    const {levelNumber, setLevelNumber} = useContext(LevelNumberContext)
+    const { currentUser, setCurrentUser } = useContext(UserContext);
+
     const navigation = useNavigation()
+
+    console.log(levelNumber, "------levelNumber");
+    console.log(currentUser.email, "----currentUser");
+
+    // Define the collection and document ID
+    const collectionName = 'users';
+    const documentId = 'currentUser.email';
+    // Specify the fields you want to update
+    const updatedFields = {
+    
+    };
+    // Update the document with the new fields
+    // db.collection(collectionName).doc(documentId).update(updatedFields)
+    // .then(() => {
+    //     console.log('Document updated successfully.');
+    // })
+    // .catch((error) => {
+    //     console.error('Error updating document: ', error);
+    // });
+
 
     useEffect(() => {
         const convertToBase64 = async (photo) => {
@@ -75,7 +102,7 @@ export default function CameraPreview({ photo, retakePicture }) {
         
     console.log(timer, "<---timer");
     console.log(currentLevel.length, "<------------ current level length");
-    console.log("whole page is rerendering");
+    // console.log("whole page is rerendering");
     return (
         <View
             style={{
@@ -85,7 +112,7 @@ export default function CameraPreview({ photo, retakePicture }) {
                 height: "100%",
             }}
         >
-             <TouchableOpacity
+            <TouchableOpacity
                 onPress={__handleBackButton}
                 style={{
                     position: "absolute",

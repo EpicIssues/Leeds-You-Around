@@ -6,6 +6,7 @@ import HasStartedContext from "./contexts/HasStartedContext";
 import LandmarksContext from "./contexts/LandmarksContext";
 import LastLocationContext from "./contexts/LastLocation";
 import LevelContext from "./contexts/LevelContext";
+import LevelNumberContext from "./contexts/LevelNumberContext"
 import RouteContext from "./contexts/RouteContext";
 import TimerContext from "./contexts/TimerContext";
 import UserContext from "./contexts/UserContext";
@@ -32,6 +33,7 @@ export default function App() {
   const [lastLocation, setLastLocation] = useState({})
   const [hasStarted, setHasStarted] = useState(false)
   const [timer, setTimer] = useState({startTime: null, endTime: null})
+  const [levelNumber, setLevelNumber] = useState(null)
 
     useEffect(() => {
       const fetchData = async () => {
@@ -47,6 +49,7 @@ export default function App() {
       fetchData();
     }, []);
   return (
+    <LevelNumberContext.Provider value={{levelNumber, setLevelNumber}}>
     <TimerContext.Provider value={{timer, setTimer}}>
     <HasStartedContext.Provider value={{hasStarted, setHasStarted}}>
     <RouteContext.Provider value={{route, setRoute}}>
@@ -125,6 +128,7 @@ export default function App() {
     </RouteContext.Provider>
     </HasStartedContext.Provider>
     </TimerContext.Provider>
+    </LevelNumberContext.Provider>
   );
 }
 
