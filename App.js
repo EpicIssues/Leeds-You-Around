@@ -15,6 +15,8 @@ import db from "./db/firestore";
 import LandmarksContext from "./contexts/LandmarksContext";
 import RouteContext from "./contexts/RouteContext";
 import LastLocationContext from "./contexts/LastLocation";
+import HasStartedContext from "./contexts/HasStartedContext";
+import TimerContext from "./contexts/TimerContext";
 
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +27,8 @@ export default function App() {
   const [landmarks, setLandmarks] = useState([])
   const [route, setRoute] = useState([])
   const [lastLocation, setLastLocation] = useState({})
+  const [hasStarted, setHasStarted] = useState(false)
+  const [timer, setTimer] = useState({startTime: null, endTime: null})
 
     useEffect(() => {
       const fetchData = async () => {
@@ -40,6 +44,8 @@ export default function App() {
       fetchData();
     }, []);
   return (
+    <TimerContext.Provider value={{timer, setTimer}}>
+    <HasStartedContext.Provider value={{hasStarted, setHasStarted}}>
     <RouteContext.Provider value={{route, setRoute}}>
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
@@ -109,6 +115,8 @@ export default function App() {
     </LevelContext.Provider>
     </UserContext.Provider>
     </RouteContext.Provider>
+    </HasStartedContext.Provider>
+    </TimerContext.Provider>
   );
 }
 

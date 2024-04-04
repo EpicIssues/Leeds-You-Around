@@ -3,10 +3,15 @@ import * as FileSystem from "expo-file-system";
 import { useContext, useEffect, useState } from "react";
 import recognizeLandmark from "./APIrequest";
 import LevelContext from "../contexts/LevelContext";
+import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
+import HasStartedContext from "../contexts/HasStartedContext";
+import TimerContext from "../contexts/TimerContext";
 
 export default function CameraPreview({ photo, retakePicture }) {
     // const [landmarks, setLandmarks] = useState([false, {}]);
   const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+  const {hasStarted, setHasStarted} = useContext(HasStartedContext)
+  const {timer, setTimer} = useContext(TimerContext)
 
     const convertToBase64 = async (photo) => {
         try {
@@ -22,18 +27,41 @@ export default function CameraPreview({ photo, retakePicture }) {
         recognizeLandmark(convertedPhoto).then((data) => {
             if(data.length !== 0){
             console.log(data, '====================================data');
+
+            // target will go here ----------
             setCurrentLevel(currentLevel.filter(landmark => !data.includes(landmark.name)))
         
             console.log(currentLevel,'=================currentLevel');}
             else
             console.log('empty array of landmarks');
 
+            if (currentLevel.length < 5 && !hasStarted) {
+                setHasStarted(true)
+                setTimer({startTime: Date.now()})
+                startRouteTracking()
+                console.log("")
+                console.log("Has started")
+                console.log("")
+            }
+
+            if (currentLevel.length === 0) {
+                setTimer((currTime) => ({...currTime, endTime: Date.now()}))
+                stopRouteTracking()
+                // navigate to Rewards Page ----
+                console.log("")
+                console.log("You Have Finished")
+                console.log("")
+            }
+
+           
+
+
+
 
             // if (!landmarks[0]) setLandmarks([true, data]);
         });
     });
-
-    console.log("whole page is rerendering");
+    console.log("whole page is rerendering")
     return (
         <View
             style={{
