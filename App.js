@@ -20,7 +20,6 @@ import Rewards from "./screens/RewardsScreen";
 import UserScreen from "./screens/UserScreen";
 import Rankings from "./screens/RankingScreen";
 import ConfettiAnimation from "./utils/Confetti";
-import ConfettiAnimation from "./utils/Confetti";
 
 
 const Stack = createNativeStackNavigator();
