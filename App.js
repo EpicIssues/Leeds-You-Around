@@ -15,6 +15,9 @@ import db from "./db/firestore";
 import LandmarksContext from "./contexts/LandmarksContext";
 import RouteContext from "./contexts/RouteContext";
 import LastLocationContext from "./contexts/LastLocation";
+import Rankings from "./screens/RankingScreen";
+import UserScreen from "./screens/UserScreen";
+import Rewards from "./screens/RewardsScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -40,74 +43,76 @@ export default function App() {
       fetchData();
     }, []);
   return (
-    <RouteContext.Provider value={{route, setRoute}}>
-    <UserContext.Provider value={{currentUser, setCurrentUser}}>
-    <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
-    <LandmarksContext.Provider value={{landmarks, setLandmarks}}>
-    <LastLocationContext.Provider value={{lastLocation, setLastLocation}}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Login"
-            component={LoginScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="SignUp"
-            component={SignUpScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="LevelSelector"
-            component={LevelSelector}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="MapScreen"
-            component={MapScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CameraScreen"
-            component={CameraScreen}
-          />
-          {/* <Stack.Screen
-            options={{ headerShown: false }}
-            name="Rewards"
-            component={Rewards}
-          /> */}
-          {/* <Stack.Screen
-            options={{ headerShown: false }}
-            name="UserPage"
-            component={UserPage}
-          /> */}
-          {/* <Stack.Screen
-            options={{ headerShown: false }}
-            name="LeaderBoard"
-            component={LeaderBoard}
-          /> */}
-          {/* <Stack.Screen
+    <RouteContext.Provider value={{ route, setRoute }}>
+      <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <LevelContext.Provider value={{ currentLevel, setCurrentLevel }}>
+          <LandmarksContext.Provider value={{ landmarks, setLandmarks }}>
+            <LastLocationContext.Provider
+              value={{ lastLocation, setLastLocation }}
+            >
+              <NavigationContainer>
+                <Stack.Navigator>
+                  <Stack.Screen
+                    options={{ headerShown: true }}
+                    name="Login"
+                    component={LoginScreen}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="Home"
+                    component={HomeScreen}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="SignUp"
+                    component={SignUpScreen}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="LevelSelector"
+                    component={LevelSelector}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="MapScreen"
+                    component={MapScreen}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="CameraScreen"
+                    component={CameraScreen}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="RewardsScreen"
+                    component={Rewards}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="UserScreen"
+                    component={UserScreen}
+                  />
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="RankingScreen"
+                    component={Rankings}
+                  />
+                  {/* <Stack.Screen
             options={{ headerShown: false }}
             name="LevelAnalysis"
             component={LevelAnalysis}
           /> */}
-          {/* <Stack.Screen
+                  {/* <Stack.Screen
             options={{ headerShown: false }}
             name="Tutorial"
             component={Tutorial}
           /> */}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </LastLocationContext.Provider>
-    </LandmarksContext.Provider>
-    </LevelContext.Provider>
-    </UserContext.Provider>
+                </Stack.Navigator>
+              </NavigationContainer>
+            </LastLocationContext.Provider>
+          </LandmarksContext.Provider>
+        </LevelContext.Provider>
+      </UserContext.Provider>
     </RouteContext.Provider>
   );
 }

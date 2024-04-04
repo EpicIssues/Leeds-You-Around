@@ -15,7 +15,6 @@ export default function LevelSelector() {
   const{currentUser, setCurrentUser} = useContext(UserContext)
   const { landmarks } = useContext(LandmarksContext)
 
-console.log(currentUser,'==================currentUserfrom level selector');
   // let ctrl = true
   // do {
   //   landmarksSelector()
@@ -27,9 +26,19 @@ console.log(currentUser,'==================currentUserfrom level selector');
     setCurrentLevel(landmarks.filter(landmark=> landmark.level === level))
   }
 
+    const rewardsHandler = () => {
+      navigation.navigate("RewardsScreen");
+    };
+
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.hero}>
+        <View>
+          <TouchableOpacity onPress={rewardsHandler}>
+            <Text>Rewards</Text>
+          </TouchableOpacity>
+        </View>
         <Text>Which level</Text>
         <View style={styles.levelSelector} height="30%" width="80%">
           <TouchableOpacity
