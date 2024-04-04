@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Map from "../components/Map";
 import { useNavigation } from "@react-navigation/core";
@@ -8,12 +8,22 @@ import LandmarksContext from "../contexts/LandmarksContext";
 import UserContext from "../contexts/UserContext";
 import { auth } from "../firebase";
 import db from "../db/firestore";
+import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
+import HasStartedContext from "../contexts/HasStartedContext";
+import TimerContext from "../contexts/TimerContext";
 
 export default function LevelSelector() {
   const navigation = useNavigation();
   const { currentLevel, setCurrentLevel } = useContext(LevelContext);
   const{currentUser, setCurrentUser} = useContext(UserContext)
   const { landmarks } = useContext(LandmarksContext)
+  const { setHasStarted } = useContext(HasStartedContext);
+  const { timer, setTimer } = useContext(TimerContext)
+  
+  useEffect(() => {
+    stopRouteTracking()
+  },[])
+  
 
   // let ctrl = true
   // do {
@@ -31,6 +41,15 @@ export default function LevelSelector() {
     };
 
 
+  const handleGo = () => {
+    // startRouteTracking()
+    setTimer({ startTime: Date.now(), endTime: null });
+    setHasStarted(true)
+    console.log("----------STARTED----------")
+    navigation.navigate("MapScreen")
+  }
+
+  
   return (
     <View style={styles.mainContainer}>
       <View style={styles.hero}>
@@ -74,11 +93,8 @@ export default function LevelSelector() {
       </View>
       <View style={styles.itemListContainer}>
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.backBtn}>
-            <Text>Back</Text>
-          </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("MapScreen")}
+            onPress={handleGo}
             style={styles.goBtn}
           >
             <Text>Go</Text>
@@ -160,12 +176,6 @@ const styles = StyleSheet.create({
     height: "20%",
     borderRadius: 5,
     overflow: "hidden",
-  },
-  backBtn: {
-    backgroundColor: "white",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   goBtn: {
     backgroundColor: "#e9e9e9",
