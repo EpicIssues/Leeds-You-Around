@@ -31,10 +31,14 @@ async function recognizeLandmark(image64) {
       // if (landmark.landmarkAnnotations) {
       //   console.log("")
       //   console.log("(Potential Matches Start:)")
-        if (landmark.landmarkAnnotations.length !==0)
-          return landmark.landmarkAnnotations.map((potentialLandmark) => potentialLandmark.description)
-        else
+        try {
+          if (landmark.landmarkAnnotations.length !==0)
+            return landmark.landmarkAnnotations.map((potentialLandmark) => potentialLandmark.description)
+
+        }
+        catch {
           return []
+        }
       //   console.log("(Potential Matches End")
       //   console.log("")
       // }

@@ -2,7 +2,11 @@ import * as Location from 'expo-location'
 import { useContext, useEffect, useState } from 'react';
 import RouteContext from '../contexts/RouteContext';
 import LastLocationContext from '../contexts/LastLocation';
+import db from "../db/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
+// const liveLocationRef = db.collection('users').doc('greg@greg.com')
+// const multipleUnionRes = await liveLocationRef.update({level1route: arrayUnion(...routeOnePolyline)})
 
 let locationSubscription = null
 
@@ -13,7 +17,7 @@ export function stopRouteTracking() {
 
 export function startRouteTracking() {
 
-    const {route, setRoute} = useContext(RouteContext)
+    // const {route, setRoute} = useContext(RouteContext)
     const {lastLocation, setLastLocation} = useContext(LastLocationContext)
 
     const [liveLocation, setLiveLocation] = useState(null);
@@ -40,36 +44,55 @@ export function startRouteTracking() {
             distanceInterval: 10  
             },
             (livePos) => {
-                console.log(livePos.coords.latitude, "-----latitude");
-                console.log(livePos.coords.longitude, "-----longitude");
-                console.log(livePos.timestamp, "-----timestamp");
                 let lat = livePos.coords.latitude
                 let lng = livePos.coords.longitude
-                let timeStamp = livePos.timestamp
+                // let timeStamp = livePos.timestamp
                 
-                polylineArray.push({latitude: lat, longitude: lng})
-                console.log(polylineArray, "-----polyline array");
-                setLiveLocation(polylineArray)
+                setLiveLocation(livePos)
                 setLastLocation({latitude: lat, longitude: lng})
                 console.log(lastLocation, "-----lastLocation");
-                // setRoute({})
                 
-                // setRoute({latitude: lat, longitude: lng})
+                // setRoute([...route], {latitude: lat, longitude: lng})
+                // polylineArray.push({latitude: lat, longitude: lng})
+                // console.log(polylineArray, "-----polyline array");
+                
+
                 // setRoute([...polylineArray])
                 // console.log(route, "-----route");
-                // timeStampArray.push(timeStamp)
-                // console.log(timeStampArray, "-----timestamp Array");
             })
+            // console.log(lastLocation);
         }
+        
+        useEffect(() => {
+            if (permission === undefined){
+                // console.log("Needs permission");
+                getPermission()
+            } else {
+                getLiveLocation()
+                console.log('starting live location');
+            }
+        }, [permission])
 
-    useEffect(() => {
-        if (permission === undefined){
-            console.log("Needs permission");
-            getPermission()
-        } else {
-            getLiveLocation()
-            console.log('starting live location');
+        if (errorMsg) {
+            console.log("Error fetching: ", errorMsg);
+            text = errorMsg;
+        } else if (liveLocation) {
+            // console.log(liveLocation, "-----liveLocation");
+            console.log(liveLocation.coords.latitude, "-----latitude");
+            console.log(liveLocation.coords.longitude, "-----longitude");
+            console.log(liveLocation.timestamp, "-----timestamp");
+            let lat = liveLocation.coords.latitude
+            let lng = liveLocation.coords.longitude
+            let timeStamp = liveLocation.timestamp
+                
+            polylineArray.push({latitude: lat, longitude: lng})
+            console.log(polylineArray, "-----polyline array");
+
+            // setLiveLocation({latitude: lat, longitude: lng})
+            // console.log(liveLocation, "------liveLocation");
+
+            // console.log(lastLocation, "-----lastLocation");
+            // console.log(route, "-----route");
         }
-    }, [permission])
-
+        
 }
