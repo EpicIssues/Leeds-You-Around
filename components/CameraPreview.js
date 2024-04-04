@@ -23,24 +23,7 @@ export default function CameraPreview({ photo, retakePicture }) {
     const navigation = useNavigation()
 
     console.log(levelNumber, "------levelNumber");
-    console.log(currentUser.email, "----currentUser");
-
-    // Define the collection and document ID
-    const collectionName = 'users';
-    const documentId = 'currentUser.email';
-    // Specify the fields you want to update
-    const updatedFields = {
-    
-    };
-    // Update the document with the new fields
-    // db.collection(collectionName).doc(documentId).update(updatedFields)
-    // .then(() => {
-    //     console.log('Document updated successfully.');
-    // })
-    // .catch((error) => {
-    //     console.error('Error updating document: ', error);
-    // });
-
+    // console.log(currentUser.email, "----currentUser");
 
     useEffect(() => {
         const convertToBase64 = async (photo) => {
@@ -61,18 +44,12 @@ export default function CameraPreview({ photo, retakePicture }) {
                             data,
                             "====================================data"
                         );
-
                         // target will go here ----------
                         setCurrentLevel(
                             currentLevel.filter(
                                 (landmark) => !data.includes(landmark.name)
                             )
                         );
-
-                        // console.log(
-                        //     currentLevel,
-                        //     "=================currentLevel"
-                        // );
                     } else console.log("empty array of landmarks");
 
                     // if (!landmarks[0]) setLandmarks([true, data]);
@@ -91,6 +68,18 @@ export default function CameraPreview({ photo, retakePicture }) {
             console.log("");
             console.log("You Have Finished");
             console.log("");
+
+        if (levelNumber === 2) {
+            const updatedFields = {level2comp: true};
+            db.collection("users").doc(currentUser.email).update(updatedFields)
+                .then(() => {
+                    console.log('Document updated successfully.');
+                })
+                .catch((error) => {
+                    console.error('Error updating document: ', error);
+                });
+
+        }
 
             navigation.navigate("RewardsScreen")
         }
