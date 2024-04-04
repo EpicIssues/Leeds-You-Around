@@ -62,6 +62,9 @@ const SignUpScreen = () => {
             level1route: [],
             level2route: [],
             level3route: [],
+            level1time: 0,
+            level2time: 0,
+            level3time: 0,
           });
         })
         .catch((error) => alert(error.message));
