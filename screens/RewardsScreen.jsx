@@ -27,8 +27,8 @@ useEffect (() => {
             const docSnap = await getDoc(docRef)
         if (docSnap.exists()) {
             const allData = docSnap.data()
-            console.log(allData, "-----docSnap in rewards");
-            console.log(allData.level2route, "-----routeData");
+            // console.log(allData, "-----docSnap in rewards");
+            // console.log(allData.level2route, "-----routeData");
             if (levelNumber === 1){
                 setPolylineData(allData.level1route)
             }
