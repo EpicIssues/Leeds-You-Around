@@ -17,10 +17,10 @@ export default function CameraPreview({ photo, retakePicture }) {
     const { currentLevel, setCurrentLevel } = useContext(LevelContext);
     const { hasStarted, setHasStarted } = useContext(HasStartedContext);
     const { timer, setTimer } = useContext(TimerContext);
-    const {levelNumber, setLevelNumber} = useContext(LevelNumberContext)
+    const { levelNumber, setLevelNumber } = useContext(LevelNumberContext);
     const { currentUser, setCurrentUser } = useContext(UserContext);
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     console.log(levelNumber, "------levelNumber");
     // console.log(currentUser.email, "----currentUser");
@@ -37,60 +37,59 @@ export default function CameraPreview({ photo, retakePicture }) {
             }
         };
         convertToBase64(photo).then((convertedPhoto) => {
-            recognizeLandmark(convertedPhoto)
-                .then((data) => {
-                    if (data.length !== 0) {
-                        console.log(
-                            data,
-                            "====================================data"
-                        );
-                        // target will go here ----------
-                        setCurrentLevel(
-                            currentLevel.filter(
-                                (landmark) => !data.includes(landmark.name)
-                            )
-                        );
-                    } else console.log("empty array of landmarks");
+            recognizeLandmark(convertedPhoto).then((data) => {
+                if (data.length !== 0) {
+                    console.log(
+                        data,
+                        "====================================data"
+                    );
+                    // target will go here ----------
+                    setCurrentLevel(
+                        currentLevel.filter(
+                            (landmark) => !data.includes(landmark.name)
+                        )
+                    );
+                } else console.log("empty array of landmarks");
 
-                    // if (!landmarks[0]) setLandmarks([true, data]);
-                })
+                // if (!landmarks[0]) setLandmarks([true, data]);
             });
-        }, []);
-        
-        if (currentLevel.length === 0 && hasStarted === true) {
-            setTimer((currTime) => ({
-                startTime: currTime.startTime,
-                endTime: Date.now(),
-            }));
-            stopRouteTracking();
-            setHasStarted(false);
+        });
+    }, []);
 
-            console.log("");
-            console.log("You Have Finished");
-            console.log("");
+    if (currentLevel.length === 0 && hasStarted === true) {
+        setTimer((currTime) => ({
+            startTime: currTime.startTime,
+            endTime: Date.now(),
+        }));
+        stopRouteTracking();
+        setHasStarted(false);
+
+        console.log("");
+        console.log("You Have Finished");
+        console.log("");
 
         postPolylineArray(levelNumber)
 
         if (levelNumber === 2) {
-            const updatedFields = {level2comp: true};
-            db.collection("users").doc(currentUser.email).update(updatedFields)
+            const updatedFields = { level2comp: true };
+            db.collection("users")
+                .doc(currentUser.email)
+                .update(updatedFields)
                 .then(() => {
-                    console.log('Document updated successfully.');
+                    console.log("Document updated successfully.");
                 })
                 .catch((error) => {
-                    console.error('Error updating document: ', error);
+                    console.error("Error updating document: ", error);
                 });
-
         }
 
             navigation.navigate("Confetti")
         }
 
-        const __handleBackButton = () => {
-            navigation.goBack("MapScreen");
-        };
-        
-        
+    const __handleBackButton = () => {
+        navigation.goBack("MapScreen");
+    };
+
     console.log(timer, "<---timer");
     console.log(currentLevel.length, "<------------ current level length");
     // console.log("whole page is rerendering");
@@ -107,21 +106,23 @@ export default function CameraPreview({ photo, retakePicture }) {
                 onPress={__handleBackButton}
                 style={{
                     position: "absolute",
-                    width: "20%",
+                    width: "30%",
                     height: "6%",
-                    backgroundColor: "#14274e",
+                    backgroundColor: "white",
                     top: 100,
-                    left: 10,
+                    left: 5,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    opacity: 0.8,
-                    zIndex: 2
+                    zIndex: 2,
+                    borderRadius: 10,
+                    borderColor: "#0782F9",
+                    borderWidth: 2,
                 }}
             >
                 <Text
                     style={{
-                        color: "#fff",
+                        color: "#0782F9",
                         fontWeight: "bold",
                         textAlign: "center",
                     }}
@@ -147,11 +148,16 @@ export default function CameraPreview({ photo, retakePicture }) {
                     alignItems: "center",
                     height: 40,
                     position: "absolute",
+                    backgroundColor: "white",
+                    borderRadius: 10,
+                    borderWidth: 2,
+                    borderColor: "#0782F9",
+                    fontWeight: "bold",
                 }}
             >
                 <Text
                     style={{
-                        color: "#fff",
+                        color: "#0782F9",
                         fontWeight: "bold",
                         textAlign: "center",
                     }}
@@ -187,33 +193,48 @@ export default function CameraPreview({ photo, retakePicture }) {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "flex-end",
-                    marginRight: 10
+                    marginRight: 10,
                 }}
             >
-                <Text style={{
-                    backgroundColor: "white",
-                    color: "#14274e",
-                    padding: 15,
-                    marginVertical: 10,
-                    lineHeight: 10,
-                    fontSize: 20,
-                    fontWeight: "bold"
-
-                }}>Places Left:</Text>
+                <Text
+                    style={{
+                        backgroundColor: "white",
+                        color: "#0782F9",
+                        borderWidth: 2,
+                        borderColor: "#0782F9",
+                        padding: 15,
+                        marginVertical: 10,
+                        lineHeight: 10,
+                        fontSize: 20,
+                        fontWeight: "bold",
+                        borderRadius: 10,
+                        overflow: "hidden",
+                    }}
+                >
+                    Places Left:
+                </Text>
 
                 {currentLevel.map((landmark, index) => {
-                    return <Text key={index} style={{
-                        backgroundColor: "orange",
-                        color: "black",
-                        paddingVertical: 15,
-                        paddingHorizontal: 5,
-                        marginVertical: 10,
-                        lineHeight: 8,
-                        fontWeight: "bold",
-                        }}>
-                        {landmark.name}
-                    </Text>
-
+                    return (
+                        <Text
+                            key={index}
+                            style={{
+                                borderColor: "white",
+                                borderWidth: 2,
+                                backgroundColor: "#0782F9",
+                                color: "white",
+                                paddingVertical: 15,
+                                paddingHorizontal: 5,
+                                marginVertical: 10,
+                                lineHeight: 8,
+                                fontWeight: "bold",
+                                borderRadius: 10,
+                                overflow: "hidden",
+                            }}
+                        >
+                            {landmark.name}
+                        </Text>
+                    );
                 })}
             </View>
         </View>

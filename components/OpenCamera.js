@@ -47,10 +47,6 @@ export default function OpenCamera({
                     left: "30%",
                     borderColor: "white",
                     borderWidth: "2%",
-                    opacity: 0.6,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
             }}>
 
             </View>
