@@ -16,6 +16,9 @@ import LevelSelector from "./screens/LevelSelector";
 import LoginScreen from "./screens/LoginScreen";
 import MapScreen from "./screens/MapScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import Rewards from "./screens/RewardsScreen";
+import UserScreen from "./screens/UserScreen";
+import Rankings from "./screens/RankingScreen";
 
 
 const Stack = createNativeStackNavigator();
