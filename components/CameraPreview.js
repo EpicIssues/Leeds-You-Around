@@ -6,12 +6,14 @@ import LevelContext from "../contexts/LevelContext";
 import { startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CameraPreview({ photo, retakePicture }) {
     // const [landmarks, setLandmarks] = useState([false, {}]);
     const { currentLevel, setCurrentLevel } = useContext(LevelContext);
     const { hasStarted, setHasStarted } = useContext(HasStartedContext);
     const { timer, setTimer } = useContext(TimerContext);
+    const navigation = useNavigation()
 
     useEffect(() => {
         const convertToBase64 = async (photo) => {
@@ -48,17 +50,6 @@ export default function CameraPreview({ photo, retakePicture }) {
 
                     // if (!landmarks[0]) setLandmarks([true, data]);
                 })
-                .then(() => {
-                    // if (!hasStarted && currentLevel.length === 4) {
-                        // setTimer({ startTime: Date.now(), endTime: null });
-                        // console.log("");
-                        // console.log("Has started");
-                        // console.log("");
-                        // startRouteTracking();
-                        // setHasStarted(true);
-                    // }
-
-                });
             });
         }, []);
         
@@ -69,10 +60,12 @@ export default function CameraPreview({ photo, retakePicture }) {
             }));
             stopRouteTracking();
             setHasStarted(false);
-            // navigate to Rewards Page ----
+
             console.log("");
             console.log("You Have Finished");
             console.log("");
+
+            navigation.navigate("RewardsScreen")
         }
         
         
