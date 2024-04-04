@@ -154,6 +154,50 @@ export default function CameraPreview({ photo, retakePicture }) {
             >
                 {/* {JSON.stringify(landmarks[1])} */}
             </Text>
+
+            <View
+                style={{
+                    width: "60%",
+                    right: "0%",
+                    top: "25%",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: 40,
+                    position: "absolute",
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "flex-end",
+                    marginRight: 10
+                }}
+            >
+                <Text style={{
+                    backgroundColor: "white",
+                    color: "#14274e",
+                    padding: 15,
+                    marginVertical: 10,
+                    lineHeight: 10,
+                    fontSize: 20,
+                    fontWeight: "bold"
+
+                }}>Places Left:</Text>
+
+                {currentLevel.map((landmark, index) => {
+                    return <Text key={index} style={{
+                        backgroundColor: "orange",
+                        color: "black",
+                        paddingVertical: 15,
+                        paddingHorizontal: 5,
+                        marginVertical: 10,
+                        lineHeight: 8,
+                        fontWeight: "bold",
+                        }}>
+                        {landmark.name}
+                    </Text>
+
+                })}
+            </View>
         </View>
     );
 }
