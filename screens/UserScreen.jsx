@@ -89,7 +89,7 @@ function UserScreen() {
               return (
                 <View>
                 <Text key={landmark.name} style={styles.sight}>{landmark.name}</Text>
-                  <Text>{landmark.description}</Text>
+                  <Text key={landmark.description}>{landmark.description}</Text>
                 </View>
               );
             })}
@@ -149,8 +149,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   sight: {
-    height: 100,
-    height: "auto",
+    height: 'auto',
     width: "90%",
     borderRadius: 20,
     textAlign: "center",
@@ -158,6 +157,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     overflow: "hidden",
+    left: 140
   },
   rankingBtn: {
     height: 50,
