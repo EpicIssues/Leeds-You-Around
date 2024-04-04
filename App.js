@@ -1,25 +1,21 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
-import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/LoginScreen";
-import SignUpScreen from "./screens/SignUpScreen";
-import CameraView from "./screens/CameraScreen";
-import CameraScreen from "./screens/CameraScreen";
-import LevelSelector from "./screens/LevelSelector";
-import UserContext from "./contexts/UserContext";
 import { useEffect, useState } from "react";
-import MapScreen from "./screens/MapScreen";
-import LevelContext from "./contexts/LevelContext";
-import db from "./db/firestore";
-import LandmarksContext from "./contexts/LandmarksContext";
-import RouteContext from "./contexts/RouteContext";
-import LastLocationContext from "./contexts/LastLocation";
+import { StyleSheet } from "react-native";
 import HasStartedContext from "./contexts/HasStartedContext";
+import LandmarksContext from "./contexts/LandmarksContext";
+import LastLocationContext from "./contexts/LastLocation";
+import LevelContext from "./contexts/LevelContext";
+import RouteContext from "./contexts/RouteContext";
 import TimerContext from "./contexts/TimerContext";
-import Rankings from "./screens/RankingScreen";
-import UserScreen from "./screens/UserScreen";
-import Rewards from "./screens/RewardsScreen";
+import UserContext from "./contexts/UserContext";
+import db from "./db/firestore";
+import CameraScreen from "./screens/CameraScreen";
+import HomeScreen from "./screens/HomeScreen";
+import LevelSelector from "./screens/LevelSelector";
+import LoginScreen from "./screens/LoginScreen";
+import MapScreen from "./screens/MapScreen";
+import SignUpScreen from "./screens/SignUpScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -49,14 +45,12 @@ export default function App() {
   return (
     <TimerContext.Provider value={{timer, setTimer}}>
     <HasStartedContext.Provider value={{hasStarted, setHasStarted}}>
-    <RouteContext.Provider value={{ route, setRoute }}>
-      <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-        <LevelContext.Provider value={{ currentLevel, setCurrentLevel }}>
-          <LandmarksContext.Provider value={{ landmarks, setLandmarks }}>
-            <LastLocationContext.Provider
-              value={{ lastLocation, setLastLocation }}
-            >
-              <NavigationContainer>
+    <RouteContext.Provider value={{route, setRoute}}>
+    <UserContext.Provider value={{currentUser, setCurrentUser}}>
+    <LevelContext.Provider value={{currentLevel, setCurrentLevel}}>
+    <LandmarksContext.Provider value={{landmarks, setLandmarks}}>
+    <LastLocationContext.Provider value={{lastLocation, setLastLocation}}>
+    <NavigationContainer>
                 <Stack.Navigator>
                   <Stack.Screen
                     options={{ headerShown: true }}
@@ -115,10 +109,10 @@ export default function App() {
           /> */}
                 </Stack.Navigator>
               </NavigationContainer>
-            </LastLocationContext.Provider>
-          </LandmarksContext.Provider>
-        </LevelContext.Provider>
-      </UserContext.Provider>
+    </LastLocationContext.Provider>
+    </LandmarksContext.Provider>
+    </LevelContext.Provider>
+    </UserContext.Provider>
     </RouteContext.Provider>
     </HasStartedContext.Provider>
     </TimerContext.Provider>
