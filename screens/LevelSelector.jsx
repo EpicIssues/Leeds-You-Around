@@ -15,7 +15,7 @@ export default function LevelSelector() {
   const{currentUser, setCurrentUser} = useContext(UserContext)
   const { landmarks } = useContext(LandmarksContext)
 
-console.log(currentUser,'==================currentUserfrom level selector');
+// console.log(currentUser,'==================currentUserfrom level selector');
   // let ctrl = true
   // do {
   //   landmarksSelector()
