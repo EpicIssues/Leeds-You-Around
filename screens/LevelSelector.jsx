@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
   goBtn: {
-    height: "50%",
+    height: "40%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderColor: "#0782F9",
     borderWidth: 2,
-    marginBottom: 210,
+    marginBottom: 200,
     margin: 100,
   },
   buttonOutlineText: {
