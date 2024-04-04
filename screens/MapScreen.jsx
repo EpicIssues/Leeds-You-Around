@@ -6,10 +6,9 @@ import { useContext } from "react";
 import { startRouteTracking } from "../utils/routeTracking";
 
 export default function MapScreen() {
+    startRouteTracking()
     const navigation = useNavigation()
     const { currentLevel, setCurrentLevel } = useContext(LevelContext);
-
-    startRouteTracking()
 
 
     const toCameraHandler = () => {
