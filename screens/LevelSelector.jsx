@@ -15,15 +15,15 @@ import TimerContext from "../contexts/TimerContext";
 export default function LevelSelector() {
   const navigation = useNavigation();
   const { currentLevel, setCurrentLevel } = useContext(LevelContext);
-  const{currentUser, setCurrentUser} = useContext(UserContext)
-  const { landmarks } = useContext(LandmarksContext)
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { landmarks, setLandmarks } = useContext(LandmarksContext);
   const { setHasStarted } = useContext(HasStartedContext);
-  const { timer, setTimer } = useContext(TimerContext)
-  
+  const { timer, setTimer } = useContext(TimerContext);
+
   useEffect(() => {
-    stopRouteTracking()
-  },[])
-  
+    setCurrentLevel(landmarks.filter((landmark) => landmark.level === 1));
+    stopRouteTracking();
+  }, []);
 
   // let ctrl = true
   // do {
@@ -32,77 +32,85 @@ export default function LevelSelector() {
   // }
   // while (ctrl === true)
 
-  function landmarksSelector(level=1) {
-    setCurrentLevel(landmarks.filter(landmark=> landmark.level === level))
+  // setCurrentLevel(landmarks.filter(landmark => landmark.level === 1))
+  function landmarksSelector(level = 1) {
+    setCurrentLevel(landmarks.filter((landmark) => landmark.level === level));
   }
+  // console.log(currentLevel[0].level, '=======================lan');
 
-    const rewardsHandler = () => {
-      navigation.navigate("RewardsScreen");
-    };
-
+  const rewardsHandler = () => {
+    navigation.navigate("Confetti");
+  };
 
   const handleGo = () => {
     // startRouteTracking()
     setTimer({ startTime: Date.now(), endTime: null });
-    setHasStarted(true)
-    console.log("----------STARTED----------")
-    navigation.navigate("MapScreen")
-  }
+    setHasStarted(true);
+    console.log("----------STARTED----------");
+    navigation.navigate("MapScreen");
+  };
 
-  
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.hero}>
-        <View>
-          <TouchableOpacity onPress={rewardsHandler}>
-            <Text>Rewards</Text>
-          </TouchableOpacity>
+  if (currentLevel.length > 0) {
+    return (
+      <View style={styles.mainContainer}>
+        <View style={styles.hero}>
+          <View>
+            <TouchableOpacity onPress={rewardsHandler}>
+              <Text>Rewards</Text>
+            </TouchableOpacity>
+          </View>
+          <Text>Select Level</Text>
+          <View style={styles.levelSelector} height="30%" width="80%">
+            <TouchableOpacity
+              style={[
+                styles.one,
+                currentLevel[0].level === 1 && styles.selectedButton,
+              ]}
+              onPress={() => landmarksSelector(1)}
+            >
+              <Text>Level 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.two,
+                currentLevel[0].level === 2 && styles.selectedButton,
+              ]}
+              onPress={() => landmarksSelector(2)}
+            >
+              <Text>Level 2</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.three,
+                currentLevel[0].level === 3 && styles.selectedButton,
+              ]}
+              onPress={() => landmarksSelector(3)}
+            >
+              <Text>Level 3</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <Text>Which level</Text>
-        <View style={styles.levelSelector} height="30%" width="80%">
-          <TouchableOpacity
-            style={[styles.one, currentLevel === 0 && styles.selectedButton]}
-            onPress={() => landmarksSelector(1)}
-          >
-            <Text>1X</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.two, currentLevel === 1 && styles.selectedButton]}
-            onPress={() => landmarksSelector(2)}
-          >
-            <Text>2X</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.three, currentLevel === 2 && styles.selectedButton]}
-            onPress={() => landmarksSelector(3)}
-          >
-            <Text>3X</Text>
-          </TouchableOpacity>
+        <View style={styles.mapView}>
+          <Map
+            style={styles.map}
+            initialRegion={{
+              latitude: 53.79543,
+              longitude: -1.54765,
+              latitudeDelta: 200,
+              longitudeDelta: 200,
+            }}
+          />
+        </View>
+        <View style={styles.itemListContainer}>
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity onPress={handleGo} style={styles.goBtn}>
+              <Text>Go</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-      <View style={styles.mapView}>
-        <Map
-          style={styles.map}
-          initialRegion={{
-            latitude: 53.79543,
-            longitude: -1.54765,
-            latitudeDelta: 200,
-            longitudeDelta: 200,
-          }}
-        />
-      </View>
-      <View style={styles.itemListContainer}>
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            onPress={handleGo}
-            style={styles.goBtn}
-          >
-            <Text>Go</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
