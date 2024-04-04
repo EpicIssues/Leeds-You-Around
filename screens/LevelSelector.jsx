@@ -68,7 +68,15 @@ export default function LevelSelector() {
               ]}
               onPress={() => landmarksSelector(1)}
             >
-              <Text>Level 1</Text>
+              <Text
+                style={
+                  (styles.buttonOutlineText,
+                  currentLevel[0].level === 1 &&
+                    styles.buttonOutlineTextSelected)
+                }
+              >
+                Level 1
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -77,7 +85,15 @@ export default function LevelSelector() {
               ]}
               onPress={() => landmarksSelector(2)}
             >
-              <Text>Level 2</Text>
+              <Text
+                style={
+                  (styles.buttonOutlineText,
+                  currentLevel[0].level === 2 &&
+                    styles.buttonOutlineTextSelected)
+                }
+              >
+                Level 2
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -86,7 +102,15 @@ export default function LevelSelector() {
               ]}
               onPress={() => landmarksSelector(3)}
             >
-              <Text>Level 3</Text>
+              <Text
+                style={
+                  (styles.buttonOutlineText,
+                  currentLevel[0].level === 3 &&
+                    styles.buttonOutlineTextSelected)
+                }
+              >
+                Level 3
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -104,7 +128,7 @@ export default function LevelSelector() {
         <View style={styles.itemListContainer}>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity onPress={handleGo} style={styles.goBtn}>
-              <Text>Go</Text>
+              <Text style={styles.buttonOutlineText}>START</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -133,6 +157,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 30,
     overflow: "hidden",
+    borderColor: "#0782F9",
   },
   one: {
     flex: 1,
@@ -140,6 +165,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRightWidth: 1,
+    alignItems: "center",
+    borderColor: "#0782F9",
   },
   two: {
     flex: 1,
@@ -147,6 +174,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRightWidth: 1,
+    borderColor: "#0782F9",
   },
   three: {
     flex: 1,
@@ -156,7 +184,7 @@ const styles = StyleSheet.create({
   },
 
   selectedButton: {
-    backgroundColor: "#ccc", 
+    backgroundColor: "#0782F9",
   },
   map: {
     backgroundColor: "#eee",
@@ -176,20 +204,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonsContainer: {
-    backgroundColor: "white",
+    backgroundColor: "#eee",
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
     marginBottom: 20,
-    height: "20%",
+    height: "30%",
     borderRadius: 5,
     overflow: "hidden",
+    borderColor: "#0782F9",
   },
   goBtn: {
-    backgroundColor: "#e9e9e9",
     height: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 50,
+
+    backgroundColor: "white",
+    borderColor: "#0782F9",
+    borderWidth: 2,
+    marginTop: 10,
+
+    margin: 10,
+  },
+  buttonOutlineText: {
+    color: "#0782F9",
+    fontSize: 15,
+  },
+  buttonOutlineTextSelected: {
+    color: "white",
+    fontSize: 15,
   },
 });
