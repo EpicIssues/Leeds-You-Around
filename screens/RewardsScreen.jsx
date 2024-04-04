@@ -1,21 +1,72 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity, LogBox } from 'react-native';
 import Map from "../components/Map";
 import UserContext from "../contexts/UserContext";
+import LevelNumberContext from "../contexts/LevelNumberContext";
+import { Polyline } from 'react-native-maps';
+import db from '../db/firestore';
+import { doc, updateDoc, arrayUnion, getDoc} from "firebase/firestore";
+import { all } from 'axios';
+
+
 
 function Rewards() {
     const {currentUser, setCurrentUser} = useContext(UserContext)
-    console.log(currentUser);
+    const {levelNumber, setLevelNumber} = useContext(LevelNumberContext)
+    const [polylineData, setPolylineData] = useState(null)
+    
     const level1Complete = currentUser.data.level1comp
     const level2Complete = currentUser.data.level2comp
     const level3Complete = currentUser.data.level3comp
-    // console.log(level1Complete);
+
+    const docRef = doc(db, "users", currentUser.email)
+    
+useEffect (() => {
+    const fetchData = async () => {
+        try {
+            const docSnap = await getDoc(docRef)
+        if (docSnap.exists()) {
+            const allData = docSnap.data()
+            console.log(allData, "-----docSnap in rewards");
+            console.log(allData.level2route, "-----routeData");
+            if (levelNumber === 1){
+                setPolylineData(allData.level1route)
+            }
+            if (levelNumber === 2){
+                setPolylineData(allData.level2route)
+            }
+            if (levelNumber === 3){
+                setPolylineData(allData.level3route)
+            }
+        }
+        } catch (error) {
+        console.error("Error fetching data:", error);
+        }
+    };
+    fetchData();
+} , [])
+
+    // if (level === 2) {
+    //     const updatedFields = {level2route: arrayUnion(...polylineArray)};
+    //     db.collection("users").doc(currentUser.email).update(updatedFields)
+    //         .then(() => {
+    //             console.log('Document updated successfully.');
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error updating document: ', error);
+    //         });
+    // }
+    
 
     return (
     <View style={styles.main}>
         <View style={styles.statsContainer}>
-            <View><Text>Distance</Text></View>
-            <View><Text>Duration</Text></View>
+            {/* <View><Text>Distance</Text></View> */}
+            <View>
+                <Text>
+                    Duration
+                </Text>
+            </View>
         </View>
         <View style={styles.mapView}>
         <Map
@@ -26,7 +77,15 @@ function Rewards() {
             latitudeDelta: 200,
             longitudeDelta: 200,
             }}
-        />
+        >
+            <Polyline 
+            coordinates={polylineData}
+            strokeColor="#000"
+            fillColor="rgba(255,0,47,1)"
+            strokeWidth={6}
+            lineDashPattern={[1]}
+            />
+        </Map>
         </View>
         {/* <View style={styles.positionContainer}>
             <Text>Position</Text>
@@ -37,6 +96,11 @@ function Rewards() {
             <Image style={[level2Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
             <Image style={[level3Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
         </View>
+        <TouchableOpacity>
+            <Text>
+
+            </Text>
+        </TouchableOpacity>
         <View style={styles.allStats}> 
             <Text style={styles.allStatsBtn}>All stats</Text>
         </View>
