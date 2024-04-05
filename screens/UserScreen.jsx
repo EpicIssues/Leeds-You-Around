@@ -87,9 +87,10 @@ function UserScreen() {
             .filter((landmark) => landmark.level === 1)
             .map((landmark, index) => {
               return (
-                <Text key={landmark.name} style={styles.sight}>
-                  <Text>{landmark.description}</Text>
-                </Text>
+                <View>
+                <Text key={landmark.name} style={styles.sight}>{landmark.name}</Text>
+                  <Text key={landmark.description}>{landmark.description}</Text>
+                </View>
               );
             })}
         </View>
@@ -144,11 +145,11 @@ const styles = StyleSheet.create({
   sightsContainer: {
     gap: 20,
     alignItems: "center",
+    justifyContent: 'center',
     flexDirection: "column",
   },
   sight: {
-    height: 100,
-    height: "auto",
+    height: 'auto',
     width: "90%",
     borderRadius: 20,
     textAlign: "center",
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     overflow: "hidden",
+    left: 140
   },
   rankingBtn: {
     height: 50,
