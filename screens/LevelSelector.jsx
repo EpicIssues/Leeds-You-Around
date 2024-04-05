@@ -54,12 +54,12 @@ export default function LevelSelector() {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.hero}>
-          <View>
+          {/* <View>
             <TouchableOpacity onPress={rewardsHandler}>
               <Text>Rewards</Text>
             </TouchableOpacity>
-          </View>
-          <Text>Select Level</Text>
+          </View> */}
+          <Text style={styles.selectLevel}>Select Level</Text>
           <View style={styles.levelSelector} height="30%" width="80%">
             <TouchableOpacity
               style={[
@@ -152,6 +152,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     overflow: "hidden",
     borderColor: "#0782F9",
+  },
+  selectLevel: {
+    fontSize: 30,
+    marginBottom: 20
   },
   one: {
     flex: 1,

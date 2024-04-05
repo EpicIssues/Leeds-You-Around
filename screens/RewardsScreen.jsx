@@ -3,10 +3,11 @@ import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity, LogBox } from 
 import Map from "../components/Map";
 import UserContext from "../contexts/UserContext";
 import LevelNumberContext from "../contexts/LevelNumberContext";
-import { Polyline } from 'react-native-maps';
+import MapView, { Polyline, PROVIDER_GOOGLE} from 'react-native-maps';
 import db from '../db/firestore';
 import { doc, updateDoc, arrayUnion, getDoc} from "firebase/firestore";
 import { all } from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -14,6 +15,8 @@ function Rewards() {
     const {currentUser, setCurrentUser} = useContext(UserContext)
     const {levelNumber, setLevelNumber} = useContext(LevelNumberContext)
     const [polylineData, setPolylineData] = useState(null)
+
+    const navigation = useNavigation()
     
     const level1Complete = currentUser.data.level1comp
     const level2Complete = currentUser.data.level2comp
@@ -46,37 +49,37 @@ useEffect (() => {
     fetchData();
 } , [])
 
-    // if (level === 2) {
-    //     const updatedFields = {level2route: arrayUnion(...polylineArray)};
-    //     db.collection("users").doc(currentUser.email).update(updatedFields)
-    //         .then(() => {
-    //             console.log('Document updated successfully.');
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error updating document: ', error);
-    //         });
-    // }
-    
+const backToHandler = () => {
+    navigation.replace("MapScreen")
+}
+
+    // console.log(polylineData);
 
     return (
     <View style={styles.main}>
         <View style={styles.statsContainer}>
             {/* <View><Text>Distance</Text></View> */}
-            <View>
-                <Text>
-                    Duration
+            {/* <View styles={styles.durationContainer}> */}
+            <Text style={styles.congrats}>
+                    You did it!
                 </Text>
-            </View>
+                <Text style={styles.timeAndDistanceText}>
+                    Route 2 time: 
+                </Text>
+                <Text style={styles.timeAndDistanceText}>
+                17 mins 39 secs
+                </Text>
+            {/* </View> */}
         </View>
         <View style={styles.mapView}>
-        <Map
-            style={styles.map}
+        <MapView
+            style={styles.map} 
+            provider={PROVIDER_GOOGLE} 
             initialRegion={{
-            latitude: 53.79543,
-            longitude: -1.54765,
-            latitudeDelta: 200,
-            longitudeDelta: 200,
-            }}
+                latitude: 53.792660191135305,
+                longitude: -1.563090465482172,
+                latitudeDelta: 0.04,
+                longitudeDelta: 0.02,}}
         >
             <Polyline 
             coordinates={polylineData}
@@ -85,7 +88,7 @@ useEffect (() => {
             strokeWidth={6}
             lineDashPattern={[1]}
             />
-        </Map>
+        </MapView>
         </View>
         {/* <View style={styles.positionContainer}>
             <Text>Position</Text>
@@ -95,14 +98,14 @@ useEffect (() => {
             <Image style={[level1Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
             <Image style={[level2Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
             <Image style={[level3Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
-        </View>
-        <TouchableOpacity>
-            <Text>
-
-            </Text>
+        </View >
+        <View style={styles.allStats}>
+        <TouchableOpacity  onPress={backToHandler} style={styles.backButton}>
+          <Text style={styles.buttonOutlineText}>Back to map</Text>
         </TouchableOpacity>
-        <View style={styles.allStats}> 
+        {/* <View style={styles.allStats}> 
             <Text style={styles.allStatsBtn}>All stats</Text>
+        </View> */}
         </View>
     </View>
   )
@@ -114,15 +117,37 @@ const styles = StyleSheet.create({
     mapView: {
         height: "30%"
     },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+    },
     statsContainer: {
         height: "30%",
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 50,
+        // gap: 50,
         alignSelf: 'flex-start',
-        marginLeft: 40
+        marginLeft: 80
     },
+    durationContainer: {
+        backgroundColor: "#eeee",
+    justifyContent: "center",
+    alignItems: "center",
+    },
+    timeAndDistance: {
+        height: 100,
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      },
+      congrats: {
+        fontSize: 50,
+        padding: 10,
+      },
+      timeAndDistanceText: {
+        fontSize: 30,
+      },
     positionContainer: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
@@ -161,7 +186,27 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         marginTop: 30
-    }
+    },
+    backButton: {
+        // position: "absolute",
+        zIndex: 2,
+        alignContent: "center",
+        alignItems: "center",
+        // justifyContent: "center",
+        // bottom: 120,
+        backgroundColor: "white",
+        borderColor: "#0782F9",
+        borderRadius: 10,
+        borderWidth: 2,
+        paddingVertical: 15,
+        paddingHorizontal: 40,
+        marginTop: 30,
+        width: "60%",
+    },
+    buttonOutlineText: {
+        color: "#0782F9",
+        fontSize: 15
+    },
 })
 
 
