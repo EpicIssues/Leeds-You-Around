@@ -58,3 +58,21 @@ After all the landmarks are photographed, you'll get some celebratory confetti a
 -   Watchman - https://facebook.github.io/watchman/docs/install (minimum version 1.0.0)
 -   Viro - https://viro-community.readme.io/
 
+
+## eP¡c-iSSue$
+
+-   Phil Barlow
+    -    https://github.com/phillipbarlow
+    -    https://www.linkedin.com/in/phillip-barlow-0222461b5/
+-    Dan Marongiu
+    -    https://github.com/DaniMaron
+    -    https://www.linkedin.com/in/daniele-marongiu-9487b62b3/
+-    Greg Munden
+    -    https://github.com/mundocalrisian
+    -    https://www.linkedin.com/in/greg-munden/
+-    Michael Stenton
+    -    https://github.com/mstent
+    -    https://www.linkedin.com/in/michael-stenton/
+               
+
+
