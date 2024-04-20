@@ -6,8 +6,8 @@ import { useContext } from "react";
 import LevelContext from "../contexts/LevelContext";
 import LandmarksContext from "../contexts/LandmarksContext";
 import UserContext from "../contexts/UserContext";
-import { auth } from "../firebase";
-import db from "../db/firestore";
+import { auth } from "../firebase/firebase_auth";
+import db from "../firebase/firestore_db";
 import { clearPolylineArray, startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
@@ -33,20 +33,16 @@ export default function LevelSelector() {
   // setCurrentLevel(landmarks.filter(landmark => landmark.level === 1))
   function landmarksSelector(level = 1) {
     setLevelNumber(level)
-    // console.log(levelNumber);
     setCurrentLevel(landmarks.filter((landmark) => landmark.level === level));
   }
-  // console.log(currentLevel[0].level, '=======================lan');
 
     const rewardsHandler = () => {
       navigation.navigate("Confetti");
     };
 
   const handleGo = () => {
-    // startRouteTracking()
     setTimer({ startTime: Date.now(), endTime: null });
     setHasStarted(true);
-    console.log("----------STARTED----------");
     navigation.navigate("MapScreen");
   };
 

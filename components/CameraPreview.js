@@ -1,7 +1,7 @@
 import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 import * as FileSystem from "expo-file-system";
 import { useContext, useEffect, useState } from "react";
-import recognizeLandmark from "./APIrequest";
+import recognizeLandmark from "../utils/APIrequest";
 import LevelContext from "../contexts/LevelContext";
 import HasStartedContext from "../contexts/HasStartedContext";
 import TimerContext from "../contexts/TimerContext";
@@ -9,7 +9,7 @@ import LevelNumberContext from "../contexts/LevelNumberContext";
 import UserContext from "../contexts/UserContext";
 import { postPolylineArray, startRouteTracking, stopRouteTracking } from "../utils/routeTracking";
 import { useNavigation } from "@react-navigation/native";
-import db from "../db/firestore";
+import db from "../firebase/firestore_db";
 import { doc, updateDoc } from "firebase/firestore";
 
 export default function CameraPreview({ photo, retakePicture }) {
@@ -21,9 +21,6 @@ export default function CameraPreview({ photo, retakePicture }) {
     const { currentUser, setCurrentUser } = useContext(UserContext);
 
     const navigation = useNavigation();
-
-    console.log(levelNumber, "------levelNumber");
-    // console.log(currentUser.email, "----currentUser");
 
     useEffect(() => {
         const convertToBase64 = async (photo) => {
@@ -39,17 +36,16 @@ export default function CameraPreview({ photo, retakePicture }) {
         convertToBase64(photo).then((convertedPhoto) => {
             recognizeLandmark(convertedPhoto).then((data) => {
                 if (data.length !== 0) {
-                    console.log(
-                        data,
-                        "====================================data"
-                    );
+                    // console.log(data, "====================================data" );
                     // target will go here ----------
                     setCurrentLevel(
                         currentLevel.filter(
                             (landmark) => !data.includes(landmark.name)
                         )
                     );
-                } else console.log("empty array of landmarks");
+                } else {
+                    // console.log("empty array of landmarks")
+                };
 
                 // if (!landmarks[0]) setLandmarks([true, data]);
             });
@@ -65,7 +61,7 @@ export default function CameraPreview({ photo, retakePicture }) {
         setHasStarted(false);
 
         console.log("");
-        console.log("You Have Finished");
+        console.log("You Have Finished!");
         console.log("");
 
         postPolylineArray(levelNumber)
@@ -90,8 +86,8 @@ export default function CameraPreview({ photo, retakePicture }) {
         navigation.goBack("MapScreen");
     };
 
-    console.log(timer, "<---timer");
-    console.log(currentLevel.length, "<------------ current level length");
+    // console.log(timer, "<---timer");
+    // console.log(currentLevel.length, "<------------ current level length");
     // console.log("whole page is rerendering");
     return (
         <View

@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity, LogBox } from 'react-native';
-import Map from "../components/Map";
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import UserContext from "../contexts/UserContext";
 import LevelNumberContext from "../contexts/LevelNumberContext";
 import MapView, { Polyline, PROVIDER_GOOGLE} from 'react-native-maps';
-import db from '../db/firestore';
-import { doc, updateDoc, arrayUnion, getDoc} from "firebase/firestore";
-import { all } from 'axios';
+import db from '../firebase/firestore_db';
+import { doc, getDoc} from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
-
+import trophy from "../assets/trophy.png"
 
 
 function Rewards() {
@@ -30,8 +28,6 @@ useEffect (() => {
             const docSnap = await getDoc(docRef)
         if (docSnap.exists()) {
             const allData = docSnap.data()
-            // console.log(allData, "-----docSnap in rewards");
-            // console.log(allData.level2route, "-----routeData");
             if (levelNumber === 1){
                 setPolylineData(allData.level1route)
             }
@@ -53,62 +49,60 @@ const backToHandler = () => {
     navigation.replace("MapScreen")
 }
 
-    // console.log(polylineData);
-
     return (
     <View style={styles.main}>
         <View style={styles.statsContainer}>
             {/* <View><Text>Distance</Text></View> */}
             {/* <View styles={styles.durationContainer}> */}
             <Text style={styles.congrats}>
-                    You did it!
-                </Text>
-                <Text style={styles.timeAndDistanceText}>
-                    Route 2 time: 
-                </Text>
-                <Text style={styles.timeAndDistanceText}>
-                17 mins 39 secs
-                </Text>
+                You did it!
+            </Text>
+            <Text style={styles.timeAndDistanceText}>
+                Route 2 time: 
+            </Text>
+            <Text style={styles.timeAndDistanceText}>
+            17 mins 39 secs
+            </Text>
             {/* </View> */}
         </View>
         <View style={styles.mapView}>
-        <MapView
-            style={styles.map} 
-            provider={PROVIDER_GOOGLE} 
-            initialRegion={{
-                latitude: 53.792660191135305,
-                longitude: -1.563090465482172,
-                latitudeDelta: 0.04,
-                longitudeDelta: 0.02,}}
-        >
-            <Polyline 
-            coordinates={polylineData}
-            strokeColor="#000"
-            fillColor="rgba(255,0,47,1)"
-            strokeWidth={6}
-            lineDashPattern={[1]}
-            />
-        </MapView>
+            <MapView
+                style={styles.map} 
+                provider={PROVIDER_GOOGLE} 
+                initialRegion={{
+                    latitude: 53.792660191135305,
+                    longitude: -1.563090465482172,
+                    latitudeDelta: 0.04,
+                    longitudeDelta: 0.02,}}
+            >
+                <Polyline 
+                coordinates={polylineData}
+                strokeColor="#000"
+                fillColor="rgba(255,0,47,1)"
+                strokeWidth={6}
+                lineDashPattern={[1]}
+                />
+            </MapView>
         </View>
         {/* <View style={styles.positionContainer}>
             <Text>Position</Text>
             <View><Text style={styles.board}>Board</Text></View>
         </View> */}
         <View style={styles.tropies}>
-            <Image style={[level1Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
-            <Image style={[level2Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
-            <Image style={[level3Complete ? styles.imageShow : styles.imageHide]} source={require('./images/trophy.png')}/>
+            <Image style={[level1Complete ? styles.imageShow : styles.imageHide]} source={trophy}/>
+            <Image style={[level2Complete ? styles.imageShow : styles.imageHide]} source={trophy}/>
+            <Image style={[level3Complete ? styles.imageShow : styles.imageHide]} source={trophy}/>
         </View >
         <View style={styles.allStats}>
-        <TouchableOpacity  onPress={backToHandler} style={styles.backButton}>
-          <Text style={styles.buttonOutlineText}>Back to map</Text>
-        </TouchableOpacity>
+            <TouchableOpacity  onPress={backToHandler} style={styles.backButton}>
+                <Text style={styles.buttonOutlineText}>Back to map</Text>
+            </TouchableOpacity>
         {/* <View style={styles.allStats}> 
             <Text style={styles.allStatsBtn}>All stats</Text>
         </View> */}
         </View>
     </View>
-  )
+    )
 }
 const styles = StyleSheet.create({
     main: {
@@ -140,14 +134,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
-      },
-      congrats: {
+    },
+    congrats: {
         fontSize: 50,
         padding: 10,
-      },
-      timeAndDistanceText: {
+    },
+    timeAndDistanceText: {
         fontSize: 30,
-      },
+    },
     positionContainer: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',

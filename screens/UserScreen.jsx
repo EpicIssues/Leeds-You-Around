@@ -1,25 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import Map from "../components/Map";
+import {View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Polyline } from "react-native-maps";
 import UserContext from "../contexts/UserContext";
 import LevelContext from "../contexts/LevelContext";
 import LandmarksContext from "../contexts/LandmarksContext";
-import db from "../db/firestore";
+import db from "../firebase/firestore_db";
+import trophy from "../assets/trophy.png"
+
 function UserScreen() {
   const { currentUser } = useContext(UserContext);
   const { currentLevel } = useContext(LevelContext);
   const { landmarks } = useContext(LandmarksContext);
   const [level, setLevel] = useState();
-  // console.log(currentUser.data.level1comp === true)
   const polylineArray = currentUser.data.level1route;
   const navigation = useNavigation();
 
@@ -31,19 +24,21 @@ function UserScreen() {
     <ScrollView style={styles.container}>
       <View style={styles.main}>
         <View style={styles.hero}>
-          <Text style={styles.userText}>Hello {currentUser.data.username}!</Text>
+          <Text style={styles.userText}>
+            Hello {currentUser.data.username}!
+          </Text>
           <View style={styles.trophys}>
             <Image
               style={[level1Complete ? styles.imageShow : styles.imageHide]}
-              source={require("./images/trophy.png")}
+              source={trophy}
             />
             <Image
               style={[level2Complete ? styles.imageShow : styles.imageHide]}
-              source={require("./images/trophy.png")}
+              source={trophy}
             />
             <Image
               style={[level3Complete ? styles.imageShow : styles.imageHide]}
-              source={require("./images/trophy.png")}
+              source={trophy}
             />
           </View>
           {/* <TouchableOpacity
@@ -80,7 +75,9 @@ function UserScreen() {
           </MapView>
         </View>
         <View style={styles.timeAndDistance}>
-          <Text style={styles.timeAndDistanceText}>Route time: 18 mins 17 secs</Text>
+          <Text style={styles.timeAndDistanceText}>
+            Route time: 18 mins 17 secs
+          </Text>
         </View>
         <View style={styles.sightsContainer}>
           {landmarks
