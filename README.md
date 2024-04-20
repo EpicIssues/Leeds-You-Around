@@ -61,6 +61,15 @@ After all the landmarks are photographed, you'll get some celebratory confetti a
 
 ![Tech Stack](/assets/Tech%20Stack.jpeg)
 
+## Planning
+
+To plan our app, we used Excalidraw for wireframe and component tree diagrams
+
+https://excalidraw.com/
+
+We also used Jira to help manage to workflow of the project. This is actually where our team name was taken from!
+
+https://www.atlassian.com/software/jira
 
 ## Team eP¡c-iSSue$
 
@@ -82,6 +91,7 @@ After all the landmarks are photographed, you'll get some celebratory confetti a
 
 &nbsp;
 ![Team Photo](https://images.prismic.io/northcoders/ZhRfmBrFxhpPBYaI_Team-leedsyouaround.jpeg?auto=compress%2Cformat&fit=max&q=60&w=840&h=632)
+
 
 
 
