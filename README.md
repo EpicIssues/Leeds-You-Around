@@ -4,9 +4,10 @@
 
 LeedsYouAround is a landmark based scavenger hunt set in the Leeds area. It requires the player to reach the sights using the integrated map and snap a picture which will validate and tick them off.
 
-The app was developed for a final team project on the Northcoders Software Development course by Phil Barlow, Dan Marongiu, Greg Munden and Michael Stent. With some of the team being new to Leeds, we wanted a fun way to get to know the city so came up with the idea of this app.
+![Screenshots](/assets/screenshot.png)
 
-<img src="https://images.prismic.io/northcoders/ZhRfmBrFxhpPBYaI_Team-leedsyouaround.jpeg?auto=compress%2Cformat&fit=max&q=60&w=840&h=632">
+
+The app was developed for a final team project on the Northcoders Software Development course by Phil Barlow, Dan Marongiu, Greg Munden and Michael Stent. With some of the team being new to Leeds, we wanted a fun way to get to know the city so came up with the idea of this app.
 
 For more information, along with a walkthrough of the app, please visit the project page on the Northcoders website - 
 
@@ -58,21 +59,29 @@ After all the landmarks are photographed, you'll get some celebratory confetti a
 -   Watchman - https://facebook.github.io/watchman/docs/install (minimum version 1.0.0)
 -   Viro - https://viro-community.readme.io/
 
+![Tech Stack](/assets/Tech%20Stack.jpeg)
 
-## eP¡c-iSSue$
+
+## Team eP¡c-iSSue$
 
 -   Phil Barlow
     -    https://github.com/phillipbarlow
     -    https://www.linkedin.com/in/phillip-barlow-0222461b5/
--    Dan Marongiu
+
+-   Dan Marongiu
     -    https://github.com/DaniMaron
     -    https://www.linkedin.com/in/daniele-marongiu-9487b62b3/
--    Greg Munden
+
+-   Greg Munden
     -    https://github.com/mundocalrisian
     -    https://www.linkedin.com/in/greg-munden/
--    Michael Stenton
+
+-   Michael Stenton
     -    https://github.com/mstent
     -    https://www.linkedin.com/in/michael-stenton/
-               
+
+&nbsp;
+![Team Photo](https://images.prismic.io/northcoders/ZhRfmBrFxhpPBYaI_Team-leedsyouaround.jpeg?auto=compress%2Cformat&fit=max&q=60&w=840&h=632)
+
 
 
