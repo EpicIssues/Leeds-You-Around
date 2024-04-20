@@ -4,9 +4,8 @@
 
 LeedsYouAround is a landmark based scavenger hunt set in the Leeds area. It requires the player to reach the sights using the integrated map and snap a picture which will validate and tick them off.
 
-<div>
 <iframe width="715" height="404" src="https://www.youtube.com/embed/6Lrk8orXr8o" title="LeedsYouAround Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
+
 
 <!-- ![](./assets/screenshot.jpeg) -->
 
