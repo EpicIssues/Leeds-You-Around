@@ -13,7 +13,6 @@ export default function CameraScreen() {
     const [startCamera, setStartCamera] = useState(true);
 
     const currentUser = useContext(UserContext)
-    console.log(currentUser);
     // Function that Requests permissions to use camera if not already granted/denied
     const __startCamera = async () => {
         const { status } = await Camera.requestCameraPermissionsAsync();

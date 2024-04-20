@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-// import { useContext } from 'react';
 import { useNavigation } from "@react-navigation/core";
 import { useContext } from "react";
 import LevelContext from "../contexts/LevelContext";
@@ -10,7 +9,6 @@ const Map = () => {
   const mapRef = useRef();
   const navigation = useNavigation();
   const { currentLevel } = useContext(LevelContext);
-  // const[isLoading,setIsLoading] = useState(true)
 
   useEffect(() => {
     navigation.setOptions({
@@ -34,7 +32,6 @@ const Map = () => {
     );
   };
   const onRegionChange = (region) => {
-    // console.log(region,'line 33 ---')
   };
   const onMarkerSelected = (marker) => {
     // Alert.alert(marker.name);
@@ -44,11 +41,7 @@ const Map = () => {
   const callOutPressed = (ev) => {
     // console.log(ev);
   };
-  // if(isLoading){
-  //     <View>
-  //     <Text>Is loading</Text>
-  //     </View>
-  // }else{
+  
   return (
     <View style={{ flex: 1, width: "100%" }}>
       <MapView
@@ -92,5 +85,5 @@ const Map = () => {
     </View>
   );
 };
-// }
+
 export default Map;

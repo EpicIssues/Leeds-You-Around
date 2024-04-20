@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { auth } from "../firebase";
+import { auth } from "../firebase/firebase_auth";
 import "firebase/firestore";
-import db from "../db/firestore";
+import db from "../firebase/firestore_db";
 import UserContext from "../contexts/UserContext";
 
 
@@ -14,13 +14,11 @@ const HomeScreen = () => {
 
   /// getting users data into users state
   useEffect(() => {
-    // console.log(currentUser);
     const fetchData = async () => {
       try {
         const obj = await db.collection("users").get();
         const usersData = obj.docs.map((doc) => doc.data());
         setUsers(usersData);
-        // console.log(usersData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

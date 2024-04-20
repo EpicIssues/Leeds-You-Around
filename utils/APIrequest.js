@@ -1,10 +1,10 @@
 import axios from 'axios'
-// const fs = require("fs/promises");
 
-// fs.readFile("./eiffel64.txt", "utf-8").then((image64) => {
+import {LANDMARK_API_URL} from "react-native-dotenv"
+
 async function recognizeLandmark(image64) {
-    const apiKey = "AIzaSyAkQ-hRmHMICwik4Br4j9cgeJIz2xanR3g";
-    const apiUrl = `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`;
+    
+    const apiUrl = LANDMARK_API_URL
 
     const requestData = {
       requests: [
