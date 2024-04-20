@@ -6,10 +6,11 @@ import { useContext } from "react";
 import { startRouteTracking } from "../utils/routeTracking";
 
 export default function MapScreen() {
+
     startRouteTracking()
+
     const navigation = useNavigation()
     const { currentLevel, setCurrentLevel } = useContext(LevelContext);
-
 
     const toCameraHandler = () => {
         navigation.navigate('CameraScreen')
@@ -21,11 +22,6 @@ export default function MapScreen() {
     const userToHandler = () => {
       navigation.navigate("UserScreen");
     };
-// console.log(
-//     currentLevel
-//     ,
-//   "==========``````````````````````````````````````````````````````````````````````````````````````````````````"
-// );
 
     return (
       <View style={styles.mainContainer}>

@@ -4,7 +4,7 @@ import RouteContext from '../contexts/RouteContext';
 import UserContext from "../contexts/UserContext";
 import LevelContext from '../contexts/LevelContext';
 import LastLocationContext from '../contexts/LastLocation';
-import db from "../db/firestore";
+import db from "../firebase/firestore_db";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 // const liveLocationRef = db.collection('users').doc('greg@greg.com')
@@ -52,12 +52,12 @@ export function postPolylineArray (level) {
 
 export function clearPolylineArray() {
     polylineArray = []
-    console.log('clearing polylineArray');
+    // console.log('PolylineArray cleared');
 }
 
 export function stopRouteTracking() {
     locationSubscription?.remove()
-    console.log("Stopping watch...");
+    // console.log("Stopping watch...");
     }
 
 export function startRouteTracking() {
@@ -98,8 +98,8 @@ export function startRouteTracking() {
                 
                 // setRoute([...route], {latitude: lat, longitude: lng})
                 // polylineArray.push({latitude: lat, longitude: lng})
+
                 // console.log(polylineArray, "-----polyline array");
-                
 
                 // setRoute([...polylineArray])
                 // console.log(route, "-----route");
@@ -109,11 +109,10 @@ export function startRouteTracking() {
         
         useEffect(() => {
             if (permission === undefined){
-                // console.log("Needs permission");
                 getPermission()
             } else {
                 getLiveLocation()
-                console.log('starting live location');
+                // console.log('Starting live location...');
             }
         }, [permission])
 
@@ -121,22 +120,16 @@ export function startRouteTracking() {
             console.log("Error fetching: ", errorMsg);
             text = errorMsg;
         } else if (liveLocation) {
-            // console.log(liveLocation, "-----liveLocation");
-            // console.log(liveLocation.coords.latitude, "-----latitude");
-            // console.log(liveLocation.coords.longitude, "-----longitude");
-            // console.log(liveLocation.timestamp, "-----timestamp");
+
             let lat = liveLocation.coords.latitude
             let lng = liveLocation.coords.longitude
             let timeStamp = liveLocation.timestamp
                 
             polylineArray.push({latitude: lat, longitude: lng})
-            console.log(polylineArray, "-----polyline array");
 
             // setLiveLocation({latitude: lat, longitude: lng})
             // console.log(liveLocation, "------liveLocation");
 
-            // console.log(lastLocation, "-----lastLocation");
-            // console.log(route, "-----route");
         }
         
 }

@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text,Image,StyleSheet,ScrollView,TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 function Rankings() {
   return (
     <View style={styles.main}>
         <View style={styles.navigation}>
-            <Text style={styles.title}>Rankings</Text>
+            <Text style={styles.title}>
+              Rankings
+            </Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.one}>
                 <Text style={styles.buttonTxt}>1</Text>
@@ -19,15 +21,18 @@ function Rankings() {
             </View> 
         </View>
         <View style={styles.timeTable}>
-        <Text style={[styles.timeTitle, styles.centeredText]}>Time</Text>
-
+          <Text style={[styles.timeTitle, styles.centeredText]}>
+            Time
+          </Text>
         </View>
         <View style={styles.distanceTable}>
-          <Text style={[styles.distanceTitle, styles.centeredText]}>Distance</Text>
+          <Text style={[styles.distanceTitle, styles.centeredText]}>
+            Distance
+          </Text>
         </View>
         <TouchableOpacity style={styles.logout}>
           <Text style={styles.buttonTxt}>
-          Logout
+            Logout
           </Text>
         </TouchableOpacity>
     </View>

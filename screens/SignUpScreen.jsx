@@ -1,15 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import db from "../db/firestore";
-import { auth } from "../firebase";
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import db from "../firebase/firestore_db";
+import { auth } from "../firebase/firebase_auth";
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
