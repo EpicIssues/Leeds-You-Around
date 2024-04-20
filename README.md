@@ -4,8 +4,6 @@
 
 LeedsYouAround is a landmark based scavenger hunt set in the Leeds area. It requires the player to reach the sights using the integrated map and snap a picture which will validate and tick them off.
 
-![](./assets/screenshot.jpeg)
-
 The app was developed for a final team project on the Northcoders Software Development course by Phil Barlow, Dan Marongiu, Greg Munden and Michael Stent. With some of the team being new to Leeds, we wanted a fun way to get to know the city so came up with the idea of this app.
 
 <img src="https://images.prismic.io/northcoders/ZhRfmBrFxhpPBYaI_Team-leedsyouaround.jpeg?auto=compress%2Cformat&fit=max&q=60&w=840&h=632">
